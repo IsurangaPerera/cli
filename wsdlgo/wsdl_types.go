@@ -274,9 +274,9 @@ type IsSharedRolesEnabledResponse struct {
 
 // ListAllUsers was auto-generated from WSDL.
 type ListAllUsers struct {
-	XMLName xml.Name `xml:"http://mgt.user.carbon.wso2.org listAllUsers" json:"-" yaml:"-"`
-	Filter  string   `xml:"filter,omitempty" json:"filter,omitempty" yaml:"filter,omitempty"`
-	Limit   int      `xml:"limit,omitempty" json:"limit,omitempty" yaml:"limit,omitempty"`
+	XMLName xml.Name `xml:"xsd:listAllUsers" json:"-" yaml:"-"`
+	Filter  string   `xml:"xsd:filter,omitempty" json:"filter,omitempty" yaml:"filter,omitempty"`
+	Limit   int      `xml:"xsd:limit,omitempty" json:"limit,omitempty" yaml:"limit,omitempty"`
 }
 
 // ListAllUsersResponse was auto-generated from WSDL.

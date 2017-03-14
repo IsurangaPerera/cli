@@ -1,0 +1,9 @@
+  <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://org.apache.axis2/xsd">
+      <soapenv:Header></soapenv:Header>
+      <soapenv:Body>
+          <xsd:listAllUsers>
+              <xsd:filter>*</xsd:filter>
+              <xsd:limit>10</xsd:limit>
+          </xsd:listAllUsers>
+      </soapenv:Body>
+  </soapenv:Envelope>

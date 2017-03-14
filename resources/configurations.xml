@@ -1,4 +1,4 @@
-  <changePassword xmlns="http://mgt.user.carbon.wso2.org">
-      <xsd:userName>isuranga</xsd:userName>
-      <newPassword>pass</newPassword>
-  </changePassword>
+  <Configurations>
+      <baseurl>https://localhost:9443/services/UserAdmin.UserAdminHttpsSoap11Endpoint/</baseurl>
+      <Users></Users>
+  </Configurations>

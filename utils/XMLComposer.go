@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"os"
 	"encoding/xml"
+	"io/ioutil"
+	"path/filepath"
 )
 
 type Configuration struct {
@@ -59,4 +61,25 @@ func WriteBaseURL(url *string) {
 	v := &Configuration{BaseURL: *url}
 
 	generateXML(v)
+}
+
+func GetBaseURL() *string {
+
+	dir, _ := filepath.Abs(filepath.Dir(os.Args[0]))
+
+	dir = dir+"/resources"+"/configurations.xml"
+
+	xmlFile, err := os.Open(dir)
+	
+	if err != nil {
+		fmt.Println("Error opening file:", err)
+		return nil
+	}
+	defer xmlFile.Close()
+	b, _ := ioutil.ReadAll(xmlFile)
+
+	var q Configuration
+	xml.Unmarshal(b, &q)
+
+	return &q.BaseURL
 }
