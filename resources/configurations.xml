@@ -1,4 +1,4 @@
-  <Configurations>
-      <baseurl>dfgdfgdfg</baseurl>
-      <Users></Users>
-  </Configurations>
+  <changePassword xmlns="http://mgt.user.carbon.wso2.org">
+      <xsd:userName>isuranga</xsd:userName>
+      <newPassword>pass</newPassword>
+  </changePassword>

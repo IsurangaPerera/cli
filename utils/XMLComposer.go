@@ -22,6 +22,12 @@ type User struct {
 	Password string   `xml:"password"`
 }
 
+type ChangePassword struct {
+	XMLName     xml.Name `xml:"http://mgt.user.carbon.wso2.org changePassword" json:"-" yaml:"-"`
+	UserName    string   `xml:"xsd:userName,omitempty" json:"userName,omitempty" yaml:"userName,omitempty"`
+	NewPassword string   `xml:"newPassword,omitempty" json:"newPassword,omitempty" yaml:"newPassword,omitempty"`
+}
+
 func generateXML(v *Configuration) {
 
 	f, err := os.Create("../resources/configurations.xml")
