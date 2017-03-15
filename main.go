@@ -8,7 +8,7 @@ import (
 	"os"
 	//"net/url"
 	"fmt"
-	//"./parser"
+	"./parser"
 )
 
 var client *http.Client
@@ -17,7 +17,7 @@ var configFileExist bool
 func init() {
 
 	client, _ = soap.InitiateConnection()
-	//parser.InitConfiguration()
+	parser.InitConfiguration(os.Args[1:])
 
 }
 
@@ -28,7 +28,7 @@ func main() {
 		//os.Exit(1)
 	} else {
 
-		InitOperation(os.Args[1:])
+		parser.InitOperation(os.Args[1:])
 	}
 
 	utils.GetCredentials()

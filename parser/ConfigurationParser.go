@@ -12,15 +12,17 @@ var basicAuthCommand = flag.NewFlagSet("basic-auth", flag.ExitOnError)
 var baseURLCommand = flag.NewFlagSet("base-url", flag.ExitOnError)
 var basicAuth bool
 
-func InitConfiguration() {
+func InitConfiguration(args[] string) {
 	
-	switch os.Args[1] {
+	switch args[0] {
+	
 	case "basic-auth":
 		ParseBasicAuth()
 	case "base-url":
 		ParseBaseURL()
 	case "config":
 		ParseConfigurations()
+	
 	}
 }
 

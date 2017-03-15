@@ -2,14 +2,27 @@ package parser
 
 import (
 	"flag"
-	"os"
 	"strings"
-	"./wsdlgo"
+	"../wsdlgo"
 )
 
 var addInternalRoleCommand = flag.NewFlagSet("addInternalRole", flag.ExitOnError)
 var addRemoveRolesOfUserCommand = flag.NewFlagSet("addRemoveRolesOfUser", flag.ExitOnError)
 var deleteUserCommand = flag.NewFlagSet("deleteUser", flag.ExitOnError)
+
+func InitOperation(args[] string) {
+
+	switch args[0] {
+	
+	case "addInternalRole":
+		ParseAddInternalRole(args)
+	case "addRemoveRolesOfUser":
+		ParseAddRemoveRolesOfUser(args)
+	case "deleteUser":
+		ParseDeleteUser(args)
+	
+	}
+}
 
 func ParseAddInternalRole(args[] string) *wsdlgo.AddInternalRole {
 	
@@ -22,36 +35,36 @@ func ParseAddInternalRole(args[] string) *wsdlgo.AddInternalRole {
 	v := &wsdlgo.AddInternalRole{
 		RoleName    : *roleNamePtr,
 		UserList    : strings.Split(*userListPtr, " "),
-		Permissions : strings.Split(*permissionsPtr, " ")
+		Permissions : strings.Split(*permissionsPtr, " "),
 	}
 
 	return v
 }
 
-func ParseAddRemoveRolesOfUser(args[] string) *wsdlgo.ParseAddRemoveRolesOfUser {
+func ParseAddRemoveRolesOfUser(args[] string) *wsdlgo.AddRemoveRolesOfUser {
 
 	userNamePtr      := addRemoveRolesOfUserCommand.String("user-name", "", "User Name")
 	newRolesPtr      := addRemoveRolesOfUserCommand.String("new-roles", "", "New Roles")
-	deletedRoles Ptr := addRemoveRolesOfUserCommand.String("deleted-roles", "", "Deleted Roles")
+	deletedRolesPtr  := addRemoveRolesOfUserCommand.String("deleted-roles", "", "Deleted Roles")
 
 	addRemoveRolesOfUserCommand.Parse(args[0:])
 
-	v := &wsdlgo.addRemoveRolesOfUser{
+	v := &wsdlgo.AddRemoveRolesOfUser{
 		UserName     : *userNamePtr,
 		NewRoles     : strings.Split(*newRolesPtr, " "),
-		DeletedRoles : strings.Split(*deletedRolesPtr, " ")
+		DeletedRoles : strings.Split(*deletedRolesPtr, " "),
 	}
 
 	return v
 }
 
-func ParseAddRemoveRolesOfUser(args[] string) *wsdlgo.deleteUser {
+func ParseDeleteUser(args[] string) *wsdlgo.DeleteUser {
 
 	userNamePtr      := addRemoveRolesOfUserCommand.String("user-name", "", "User Name")
 
 	addRemoveRolesOfUserCommand.Parse(args[0:])
 
-	v := &wsdlgo.deleteUser{
+	v := &wsdlgo.DeleteUser{
 		UserName     : *userNamePtr,
 	}
 

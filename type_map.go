@@ -2,8 +2,6 @@ package main
 
 import (
 
-	//"os"
-	"./wsdlgo"
 	"reflect"
 	"fmt"
 	"strings"
@@ -11,16 +9,16 @@ import (
 
 var	OneWayMap = map[string]interface{}{
 
-	"addinternalrole"      : wsdlgo.AddInternalRole{},
-	"addremoverolesofuser" : wsdlgo.AddRemoveRolesOfUser{},
-	"addremoveusersofrole" : wsdlgo.AddRemoveUsersOfRole{},
-	"addrole" 			   : wsdlgo.AddRole{},
-	"adduser" 			   : wsdlgo.AddUser{},
-	"bulkimportusers"      : wsdlgo.BulkImportUsers{},
-	"changepassword"       : wsdlgo.ChangePassword{},
-	"changepasswordbyuser" : wsdlgo.ChangePasswordByUser{},
-	"deleterole"           : wsdlgo.DeleteRole{},
-	"deleteUser"           : wsdlgo.DeleteUser{},
+	"addinternalrole"      : AddInternalRole,
+	"addremoverolesofuser" : AddRemoveRolesOfUser,
+	"addremoveusersofrole" : AddRemoveUsersOfRole,
+	"addrole" 			   : AddRole,
+	"adduser" 			   : AddUser,
+	"bulkimportusers"      : BulkImportUsers,
+	"changepassword"       : ChangePassword,
+	"changepasswordbyuser" : ChangePasswordByUser,
+	"deleterole"           : DeleteRole,
+	"deleteUser"           : DeleteUser,
 }
 
 
