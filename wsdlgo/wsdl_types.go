@@ -5,13 +5,13 @@ import (
 	"encoding/xml"
 )
 
-// ClaimValue was auto-generated from WSDL.
+// ClaimValue
 type ClaimValue struct {
 	ClaimURI string `xml:"claimURI,omitempty" json:"claimURI,omitempty" yaml:"claimURI,omitempty"`
 	Value    string `xml:"value,omitempty" json:"value,omitempty" yaml:"value,omitempty"`
 }
 
-// FlaggedName was auto-generated from WSDL.
+// FlaggedName
 type FlaggedName struct {
 	Dn              string `xml:"dn,omitempty" json:"dn,omitempty" yaml:"dn,omitempty"`
 	DomainName      string `xml:"domainName,omitempty" json:"domainName,omitempty" yaml:"domainName,omitempty"`
@@ -24,7 +24,7 @@ type FlaggedName struct {
 	Shared          bool   `xml:"shared,omitempty" json:"shared,omitempty" yaml:"shared,omitempty"`
 }
 
-// UIPermissionNode was auto-generated from WSDL.
+// UIPermissionNode
 type UIPermissionNode struct {
 	DisplayName  string              `xml:"displayName,omitempty" json:"displayName,omitempty" yaml:"displayName,omitempty"`
 	NodeList     []*UIPermissionNode `xml:"nodeList,omitempty" json:"nodeList,omitempty" yaml:"nodeList,omitempty"`
@@ -32,17 +32,17 @@ type UIPermissionNode struct {
 	Selected     bool                `xml:"selected,omitempty" json:"selected,omitempty" yaml:"selected,omitempty"`
 }
 
-// UserAdminException was auto-generated from WSDL.
+// UserAdminException
 type UserAdminException struct {
 	Message string `xml:"message,omitempty" json:"message,omitempty" yaml:"message,omitempty"`
 }
 
-// UserAdminUserAdminException was auto-generated from WSDL.
+// UserAdminUserAdminException
 type UserAdminUserAdminException struct {
 	UserAdminException *UserAdminException `xml:"UserAdminException,omitempty" json:"UserAdminException,omitempty" yaml:"UserAdminException,omitempty"`
 }
 
-// UserRealmInfo was auto-generated from WSDL.
+// UserRealmInfo
 type UserRealmInfo struct {
 	AdminRole            string           `xml:"adminRole,omitempty" json:"adminRole,omitempty" yaml:"adminRole,omitempty"`
 	AdminUser            string           `xml:"adminUser,omitempty" json:"adminUser,omitempty" yaml:"adminUser,omitempty"`
@@ -60,7 +60,7 @@ type UserRealmInfo struct {
 	UserStoresInfo       []*UserStoreInfo `xml:"userStoresInfo,omitempty" json:"userStoresInfo,omitempty" yaml:"userStoresInfo,omitempty"`
 }
 
-// UserStoreInfo was auto-generated from WSDL.
+// UserStoreInfo
 type UserStoreInfo struct {
 	BulkImportSupported            bool   `xml:"bulkImportSupported,omitempty" json:"bulkImportSupported,omitempty" yaml:"bulkImportSupported,omitempty"`
 	CaseSensitiveUsername          bool   `xml:"caseSensitiveUsername,omitempty" json:"caseSensitiveUsername,omitempty" yaml:"caseSensitiveUsername,omitempty"`
@@ -79,7 +79,7 @@ type UserStoreInfo struct {
 	WriteGroupsEnabled             bool   `xml:"writeGroupsEnabled,omitempty" json:"writeGroupsEnabled,omitempty" yaml:"writeGroupsEnabled,omitempty"`
 }
 
-// AddInternalRole was auto-generated from WSDL.
+// AddInternalRole
 type AddInternalRole struct {
 	XMLName     xml.Name `xml:"http://mgt.user.carbon.wso2.org addInternalRole" json:"-" yaml:"-"`
 	RoleName    string   `xml:"roleName,omitempty" json:"roleName,omitempty" yaml:"roleName,omitempty"`
@@ -87,7 +87,7 @@ type AddInternalRole struct {
 	Permissions []string `xml:"permissions,omitempty" json:"permissions,omitempty" yaml:"permissions,omitempty"`
 }
 
-// AddRemoveRolesOfUser was auto-generated from WSDL.
+// AddRemoveRolesOfUser
 type AddRemoveRolesOfUser struct {
 	XMLName      xml.Name `xml:"http://mgt.user.carbon.wso2.org addRemoveRolesOfUser" json:"-" yaml:"-"`
 	UserName     string   `xml:"userName,omitempty" json:"userName,omitempty" yaml:"userName,omitempty"`
@@ -95,7 +95,7 @@ type AddRemoveRolesOfUser struct {
 	DeletedRoles []string `xml:"deletedRoles,omitempty" json:"deletedRoles,omitempty" yaml:"deletedRoles,omitempty"`
 }
 
-// AddRemoveUsersOfRole was auto-generated from WSDL.
+// AddRemoveUsersOfRole
 type AddRemoveUsersOfRole struct {
 	XMLName      xml.Name `xml:"http://mgt.user.carbon.wso2.org addRemoveUsersOfRole" json:"-" yaml:"-"`
 	RoleName     string   `xml:"roleName,omitempty" json:"roleName,omitempty" yaml:"roleName,omitempty"`
@@ -103,7 +103,7 @@ type AddRemoveUsersOfRole struct {
 	DeletedUsers []string `xml:"deletedUsers,omitempty" json:"deletedUsers,omitempty" yaml:"deletedUsers,omitempty"`
 }
 
-// AddRole was auto-generated from WSDL.
+// AddRole
 type AddRole struct {
 	XMLName      xml.Name `xml:"http://mgt.user.carbon.wso2.org addRole" json:"-" yaml:"-"`
 	RoleName     string   `xml:"roleName,omitempty" json:"roleName,omitempty" yaml:"roleName,omitempty"`
@@ -112,7 +112,7 @@ type AddRole struct {
 	IsSharedRole bool     `xml:"isSharedRole,omitempty" json:"isSharedRole,omitempty" yaml:"isSharedRole,omitempty"`
 }
 
-// AddUser was auto-generated from WSDL.
+// AddUser
 type AddUser struct {
 	XMLName     xml.Name      `xml:"http://mgt.user.carbon.wso2.org addUser" json:"-" yaml:"-"`
 	UserName    string        `xml:"userName,omitempty" json:"userName,omitempty" yaml:"userName,omitempty"`
@@ -122,7 +122,7 @@ type AddUser struct {
 	ProfileName string        `xml:"profileName,omitempty" json:"profileName,omitempty" yaml:"profileName,omitempty"`
 }
 
-// BulkImportUsers was auto-generated from WSDL.
+// BulkImportUsers
 type BulkImportUsers struct {
 	XMLName         xml.Name `xml:"http://mgt.user.carbon.wso2.org bulkImportUsers" json:"-" yaml:"-"`
 	UserStoreDomain string   `xml:"userStoreDomain,omitempty" json:"userStoreDomain,omitempty" yaml:"userStoreDomain,omitempty"`
@@ -131,14 +131,14 @@ type BulkImportUsers struct {
 	DefaultPassword string   `xml:"defaultPassword,omitempty" json:"defaultPassword,omitempty" yaml:"defaultPassword,omitempty"`
 }
 
-// ChangePassword was auto-generated from WSDL.
+// ChangePassword
 type ChangePassword struct {
 	XMLName     xml.Name `xml:"http://mgt.user.carbon.wso2.org changePassword" json:"-" yaml:"-"`
 	UserName    string   `xml:"userName,omitempty" json:"userName,omitempty" yaml:"userName,omitempty"`
 	NewPassword string   `xml:"newPassword,omitempty" json:"newPassword,omitempty" yaml:"newPassword,omitempty"`
 }
 
-// ChangePasswordByUser was auto-generated from WSDL.
+// ChangePasswordByUser
 type ChangePasswordByUser struct {
 	XMLName     xml.Name `xml:"http://mgt.user.carbon.wso2.org changePasswordByUser" json:"-" yaml:"-"`
 	UserName    string   `xml:"userName,omitempty" json:"userName,omitempty" yaml:"userName,omitempty"`
@@ -146,19 +146,19 @@ type ChangePasswordByUser struct {
 	NewPassword string   `xml:"newPassword,omitempty" json:"newPassword,omitempty" yaml:"newPassword,omitempty"`
 }
 
-// DeleteRole was auto-generated from WSDL.
+// DeleteRole
 type DeleteRole struct {
 	XMLName  xml.Name `xml:"http://mgt.user.carbon.wso2.org deleteRole" json:"-" yaml:"-"`
 	RoleName string   `xml:"roleName,omitempty" json:"roleName,omitempty" yaml:"roleName,omitempty"`
 }
 
-// DeleteUser was auto-generated from WSDL.
+// DeleteUser
 type DeleteUser struct {
 	XMLName  xml.Name `xml:"http://mgt.user.carbon.wso2.org deleteUser" json:"-" yaml:"-"`
 	UserName string   `xml:"userName,omitempty" json:"userName,omitempty" yaml:"userName,omitempty"`
 }
 
-// GetAllPermittedRoleNames was auto-generated from WSDL.
+// GetAllPermittedRoleNames
 type GetAllPermittedRoleNames struct {
 	XMLName    xml.Name `xml:"http://mgt.user.carbon.wso2.org getAllPermittedRoleNames" json:"-" yaml:"-"`
 	Filter     string   `xml:"filter,omitempty" json:"filter,omitempty" yaml:"filter,omitempty"`
@@ -166,63 +166,63 @@ type GetAllPermittedRoleNames struct {
 	Limit      int      `xml:"limit,omitempty" json:"limit,omitempty" yaml:"limit,omitempty"`
 }
 
-// GetAllPermittedRoleNamesResponse was auto-generated from WSDL.
+// GetAllPermittedRoleNamesResponse
 type GetAllPermittedRoleNamesResponse struct {
 	Return []*FlaggedName `xml:"return,omitempty" json:"return,omitempty" yaml:"return,omitempty"`
 }
 
-// GetAllRolesNames was auto-generated from WSDL.
+// GetAllRolesNames
 type GetAllRolesNames struct {
 	XMLName xml.Name `xml:"http://mgt.user.carbon.wso2.org getAllRolesNames" json:"-" yaml:"-"`
 	Filter  string   `xml:"filter,omitempty" json:"filter,omitempty" yaml:"filter,omitempty"`
 	Limit   int      `xml:"limit,omitempty" json:"limit,omitempty" yaml:"limit,omitempty"`
 }
 
-// GetAllRolesNamesResponse was auto-generated from WSDL.
+// GetAllRolesNamesResponse
 type GetAllRolesNamesResponse struct {
 	Return []*FlaggedName `xml:"return,omitempty" json:"return,omitempty" yaml:"return,omitempty"`
 }
 
-// GetAllSharedRoleNames was auto-generated from WSDL.
+// GetAllSharedRoleNames
 type GetAllSharedRoleNames struct {
 	XMLName xml.Name `xml:"http://mgt.user.carbon.wso2.org getAllSharedRoleNames" json:"-" yaml:"-"`
 	Filter  string   `xml:"filter,omitempty" json:"filter,omitempty" yaml:"filter,omitempty"`
 	Limit   int      `xml:"limit,omitempty" json:"limit,omitempty" yaml:"limit,omitempty"`
 }
 
-// GetAllSharedRoleNamesResponse was auto-generated from WSDL.
+// GetAllSharedRoleNamesResponse
 type GetAllSharedRoleNamesResponse struct {
 	Return []*FlaggedName `xml:"return,omitempty" json:"return,omitempty" yaml:"return,omitempty"`
 }
 
-// GetAllUIPermissions was auto-generated from WSDL.
+// GetAllUIPermissions
 type GetAllUIPermissions struct{}
 
-// GetAllUIPermissionsResponse was auto-generated from WSDL.
+// GetAllUIPermissionsResponse
 type GetAllUIPermissionsResponse struct {
 	Return *UIPermissionNode `xml:"return,omitempty" json:"return,omitempty" yaml:"return,omitempty"`
 }
 
-// GetRolePermissions was auto-generated from WSDL.
+// GetRolePermissions
 type GetRolePermissions struct {
 	XMLName  xml.Name `xml:"http://mgt.user.carbon.wso2.org getRolePermissions" json:"-" yaml:"-"`
 	RoleName string   `xml:"roleName,omitempty" json:"roleName,omitempty" yaml:"roleName,omitempty"`
 }
 
-// GetRolePermissionsResponse was auto-generated from WSDL.
+// GetRolePermissionsResponse
 type GetRolePermissionsResponse struct {
 	Return *UIPermissionNode `xml:"return,omitempty" json:"return,omitempty" yaml:"return,omitempty"`
 }
 
-// GetRolesOfCurrentUser was auto-generated from WSDL.
+// GetRolesOfCurrentUser
 type GetRolesOfCurrentUser struct{}
 
-// GetRolesOfCurrentUserResponse was auto-generated from WSDL.
+// GetRolesOfCurrentUserResponse
 type GetRolesOfCurrentUserResponse struct {
 	Return []*FlaggedName `xml:"return,omitempty" json:"return,omitempty" yaml:"return,omitempty"`
 }
 
-// GetRolesOfUser was auto-generated from WSDL.
+// GetRolesOfUser
 type GetRolesOfUser struct {
 	XMLName  xml.Name `xml:"http://mgt.user.carbon.wso2.org getRolesOfUser" json:"-" yaml:"-"`
 	UserName string   `xml:"userName,omitempty" json:"userName,omitempty" yaml:"userName,omitempty"`
@@ -230,20 +230,20 @@ type GetRolesOfUser struct {
 	Limit    int      `xml:"limit,omitempty" json:"limit,omitempty" yaml:"limit,omitempty"`
 }
 
-// GetRolesOfUserResponse was auto-generated from WSDL.
+// GetRolesOfUserResponse
 type GetRolesOfUserResponse struct {
 	Return []*FlaggedName `xml:"return,omitempty" json:"return,omitempty" yaml:"return,omitempty"`
 }
 
-// GetUserRealmInfo was auto-generated from WSDL.
+// GetUserRealmInfo
 type GetUserRealmInfo struct{}
 
-// GetUserRealmInfoResponse was auto-generated from WSDL.
+// GetUserRealmInfoResponse
 type GetUserRealmInfoResponse struct {
 	Return *UserRealmInfo `xml:"return,omitempty" json:"return,omitempty" yaml:"return,omitempty"`
 }
 
-// GetUsersOfRole was auto-generated from WSDL.
+// GetUsersOfRole
 type GetUsersOfRole struct {
 	XMLName  xml.Name `xml:"http://mgt.user.carbon.wso2.org getUsersOfRole" json:"-" yaml:"-"`
 	RoleName string   `xml:"roleName,omitempty" json:"roleName,omitempty" yaml:"roleName,omitempty"`
@@ -251,40 +251,40 @@ type GetUsersOfRole struct {
 	Limit    int      `xml:"limit,omitempty" json:"limit,omitempty" yaml:"limit,omitempty"`
 }
 
-// GetUsersOfRoleResponse was auto-generated from WSDL.
+// GetUsersOfRoleResponse
 type GetUsersOfRoleResponse struct {
 	Return []*FlaggedName `xml:"return,omitempty" json:"return,omitempty" yaml:"return,omitempty"`
 }
 
-// HasMultipleUserStores was auto-generated from WSDL.
+// HasMultipleUserStores
 type HasMultipleUserStores struct{}
 
-// HasMultipleUserStoresResponse was auto-generated from WSDL.
+// HasMultipleUserStoresResponse
 type HasMultipleUserStoresResponse struct {
 	Return bool `xml:"return,omitempty" json:"return,omitempty" yaml:"return,omitempty"`
 }
 
-// IsSharedRolesEnabled was auto-generated from WSDL.
+// IsSharedRolesEnabled
 type IsSharedRolesEnabled struct{}
 
-// IsSharedRolesEnabledResponse was auto-generated from WSDL.
+// IsSharedRolesEnabledResponse
 type IsSharedRolesEnabledResponse struct {
 	Return bool `xml:"return,omitempty" json:"return,omitempty" yaml:"return,omitempty"`
 }
 
-// ListAllUsers was auto-generated from WSDL.
+// ListAllUsers
 type ListAllUsers struct {
 	XMLName xml.Name `xml:"xsd:listAllUsers" json:"-" yaml:"-"`
 	Filter  string   `xml:"xsd:filter,omitempty" json:"filter,omitempty" yaml:"filter,omitempty"`
 	Limit   int      `xml:"xsd:limit,omitempty" json:"limit,omitempty" yaml:"limit,omitempty"`
 }
 
-// ListAllUsersResponse was auto-generated from WSDL.
+// ListAllUsersResponse
 type ListAllUsersResponse struct {
 	Return []*FlaggedName `xml:"return,omitempty" json:"return,omitempty" yaml:"return,omitempty"`
 }
 
-// ListAllUsersWithPermission was auto-generated from WSDL.
+// ListAllUsersWithPermission
 type ListAllUsersWithPermission struct {
 	XMLName    xml.Name `xml:"http://mgt.user.carbon.wso2.org listAllUsersWithPermission" json:"-" yaml:"-"`
 	Filter     string   `xml:"filter,omitempty" json:"filter,omitempty" yaml:"filter,omitempty"`
@@ -292,12 +292,12 @@ type ListAllUsersWithPermission struct {
 	Limit      int      `xml:"limit,omitempty" json:"limit,omitempty" yaml:"limit,omitempty"`
 }
 
-// ListAllUsersWithPermissionResponse was auto-generated from WSDL.
+// ListAllUsersWithPermissionResponse
 type ListAllUsersWithPermissionResponse struct {
 	Return []*FlaggedName `xml:"return,omitempty" json:"return,omitempty" yaml:"return,omitempty"`
 }
 
-// ListUserByClaim was auto-generated from WSDL.
+// ListUserByClaim
 type ListUserByClaim struct {
 	XMLName    xml.Name    `xml:"http://mgt.user.carbon.wso2.org listUserByClaim" json:"-" yaml:"-"`
 	ClaimValue *ClaimValue `xml:"claimValue,omitempty" json:"claimValue,omitempty" yaml:"claimValue,omitempty"`
@@ -305,12 +305,12 @@ type ListUserByClaim struct {
 	MaxLimit   int         `xml:"maxLimit,omitempty" json:"maxLimit,omitempty" yaml:"maxLimit,omitempty"`
 }
 
-// ListUserByClaimResponse was auto-generated from WSDL.
+// ListUserByClaimResponse
 type ListUserByClaimResponse struct {
 	Return []*FlaggedName `xml:"return,omitempty" json:"return,omitempty" yaml:"return,omitempty"`
 }
 
-// ListUserByClaimWithPermission was auto-generated from WSDL.
+// ListUserByClaimWithPermission
 type ListUserByClaimWithPermission struct {
 	XMLName    xml.Name    `xml:"http://mgt.user.carbon.wso2.org listUserByClaimWithPermission" json:"-" yaml:"-"`
 	ClaimValue *ClaimValue `xml:"claimValue,omitempty" json:"claimValue,omitempty" yaml:"claimValue,omitempty"`
@@ -325,40 +325,40 @@ type ListUserByClaimWithPermissionResponse struct {
 	Return []*FlaggedName `xml:"return,omitempty" json:"return,omitempty" yaml:"return,omitempty"`
 }
 
-// ListUsers was auto-generated from WSDL.
+// ListUsers
 type ListUsers struct {
 	XMLName xml.Name `xml:"http://mgt.user.carbon.wso2.org listUsers" json:"-" yaml:"-"`
 	Filter  string   `xml:"filter,omitempty" json:"filter,omitempty" yaml:"filter,omitempty"`
 	Limit   int      `xml:"limit,omitempty" json:"limit,omitempty" yaml:"limit,omitempty"`
 }
 
-// ListUsersResponse was auto-generated from WSDL.
+// ListUsersResponse
 type ListUsersResponse struct {
 	Return []string `xml:"return,omitempty" json:"return,omitempty" yaml:"return,omitempty"`
 }
 
-// SetRoleUIPermission was auto-generated from WSDL.
+// SetRoleUIPermission
 type SetRoleUIPermission struct {
 	XMLName      xml.Name `xml:"http://mgt.user.carbon.wso2.org setRoleUIPermission" json:"-" yaml:"-"`
 	RoleName     string   `xml:"roleName,omitempty" json:"roleName,omitempty" yaml:"roleName,omitempty"`
 	RawResources []string `xml:"rawResources,omitempty" json:"rawResources,omitempty" yaml:"rawResources,omitempty"`
 }
 
-// UpdateRoleName was auto-generated from WSDL.
+// UpdateRoleName
 type UpdateRoleName struct {
 	XMLName     xml.Name `xml:"http://mgt.user.carbon.wso2.org updateRoleName" json:"-" yaml:"-"`
 	RoleName    string   `xml:"roleName,omitempty" json:"roleName,omitempty" yaml:"roleName,omitempty"`
 	NewRoleName string   `xml:"newRoleName,omitempty" json:"newRoleName,omitempty" yaml:"newRoleName,omitempty"`
 }
 
-// UpdateRolesOfUser was auto-generated from WSDL.
+// UpdateRolesOfUser
 type UpdateRolesOfUser struct {
 	XMLName     xml.Name `xml:"http://mgt.user.carbon.wso2.org updateRolesOfUser" json:"-" yaml:"-"`
 	UserName    string   `xml:"userName,omitempty" json:"userName,omitempty" yaml:"userName,omitempty"`
 	NewRoleList []string `xml:"newRoleList,omitempty" json:"newRoleList,omitempty" yaml:"newRoleList,omitempty"`
 }
 
-// UpdateUsersOfRole was auto-generated from WSDL.
+// UpdateUsersOfRole
 type UpdateUsersOfRole struct {
 	XMLName  xml.Name       `xml:"http://mgt.user.carbon.wso2.org updateUsersOfRole" json:"-" yaml:"-"`
 	RoleName string         `xml:"roleName,omitempty" json:"roleName,omitempty" yaml:"roleName,omitempty"`

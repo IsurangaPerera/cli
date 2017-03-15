@@ -1,31 +1,41 @@
 package soap
 
 import (
-	//"bytes"
+	"bytes"
 	"encoding/xml"
 	"fmt"
-	//"io"
-	//"io/ioutil"
+	"io"
+	"io/ioutil"
 	"net/http"
+	"net/url"
 	"os"
 	"path/filepath"
-	"strings"
 )
 
-// A RoundTripper executes a request passing the given req as the SOAP
-// envelope body. The HTTP response is then de-serialized onto the resp
-// object. Returns error in case an error occurs serializing req, making
-// the HTTP request, or de-serializing the response.
 type RoundTripper interface {
 	RoundTrip(req, resp Message) error
+}
+
+type Envelope struct {
+	XMLName      xml.Name `xml:"soapenv:Envelope"`
+	EnvelopeAttr string   `xml:"xmlns:soapenv,attr"`
+	NSAttr       string   `xml:"xmlns:xsd,attr"`
+	Header       Header   `xml:"soapenv:Header"`
+	Body         Body
+}
+
+type Header struct {
+	XMLName xml.Name `xml:"soapenv:Header"`
+}
+
+type Body struct {
+	XMLName xml.Name `xml:"soapenv:Body"`
+	Message Message
 }
 
 // Message is an opaque type used by the RoundTripper to carry XML
 // documents for SOAP.
 type Message interface{}
-
-// Header is an opaque type used as the SOAP Header element in requests.
-//type Header interface{}
 
 // AuthHeader is a Header to be encoded as the SOAP Header element in
 // requests, to convey credentials for authentication.
@@ -35,18 +45,11 @@ type AuthHeader struct {
 	Password  string `xml:"ns:password"`
 }
 
-// Client is a SOAP client.
 type Client struct {
-	URL         string              // URL of the server
-	Namespace   string              // SOAP Namespace
-	Envelope    string              // Optional SOAP Envelope
-	Header      Header              // Optional SOAP Header
-	ContentType string              // Optional Content-Type (default text/xml)
-	Config      *http.Client        // Optional HTTP client
-	Pre         func(*http.Request) // Optional hook to modify outbound requests
+	C *http.Client
 }
 
-func generateXML(v *Envelope) {
+func generateXML(v *Body) {
 
 	dir, _ := filepath.Abs(filepath.Dir(os.Args[0]))
 
@@ -64,41 +67,14 @@ func generateXML(v *Envelope) {
 	_, err = f.Write(output)
 }
 
-func formatRequest(r *http.Request) {
- // Create return string
- var request []string
- // Add the request string
- url := fmt.Sprintf("%v %v %v", r.Method, r.URL, r.Proto)
- request = append(request, url)
- // Add the host
- request = append(request, fmt.Sprintf("Host: %v", r.Host))
- // Loop through headers
- for name, headers := range r.Header {
-   name = strings.ToLower(name)
-   for _, h := range headers {
-     request = append(request, fmt.Sprintf("%v: %v", name, h))
-   }
- }
- 
- // If this is a POST, add post data
- if r.Method == "POST" {
-    r.ParseForm()
-    request = append(request, "\n")
-    request = append(request, r.Form.Encode())
- } 
-  // Return the request as a string
-  fmt.Println(strings.Join(request, "\n"))
-}
+func (m *Client) RoundTrip(in, out Message) error {
 
-
-// RoundTrip implements the RoundTripper interface.
-func (c *Client) RoundTrip(in, out Message) error {
-	GetSessionCookie()
-	/*req := &Envelope{
-		EnvelopeAttr: c.Envelope,
-		NSAttr:       c.Namespace,
-		Header:       Header{},
-		Body:         Body{Message: in},
+	c := m.C
+	req := &Envelope{
+		EnvelopeAttr : "",
+		NSAttr       : "",
+		Header       : Header{},
+		Body         : Body{Message: in},
 	}
 	if req.EnvelopeAttr == "" {
 		req.EnvelopeAttr = "http://schemas.xmlsoap.org/soap/envelope/"
@@ -112,42 +88,21 @@ func (c *Client) RoundTrip(in, out Message) error {
 	if err != nil {
 		return err
 	}
-	ct := c.ContentType
-	if ct == "" {
-		ct = "text/xml"
-	}
-	cli := c.Config
-	if cli == nil {
-		cli = http.DefaultClient
-	}
-	r, err := http.NewRequest("POST", c.URL, &b)
+
+	r, err := http.NewRequest("POST", URL, &b)
 	if err != nil {
 		return err
 	}
 
-	//generateXML(req)
-
-	//CreateBasicAuthRequest(r)
-
-	r.Header.Set("Content-Type", ct)
+	r.Header.Set("Content-Type", "text/xml")
 	r.Header.Set("SOAPAction", `"urn:listAllUsers"`)
-	r.Header.Set("User-Agent", "Apache-HttpClient/4.1.1 (java 1.5)")
-	r.Header.Set("Connection", "Keep-Alive")
+	u, _ := url.Parse(URL)
+	r.AddCookie(c.Jar.Cookies(u)[0])
 
-
-	if c.Pre != nil {
-		c.Pre(r)
-	}
-
-	//formatRequest(r)
-
-	resp, err := cli.Do(r)
+	resp, err := c.Do(r)
 	if err != nil {
 		return err
 	}
-
-	//ac := resp.Cookies()
-	//fmt.Println(ac[0])
 	
 	defer resp.Body.Close()
 	if resp.StatusCode != http.StatusOK {
@@ -156,26 +111,8 @@ func (c *Client) RoundTrip(in, out Message) error {
 		body, _ := ioutil.ReadAll(limReader)
 		return fmt.Errorf("%q: %q", resp.Status, body)
 	}
-	return xml.NewDecoder(resp.Body).Decode(out)*/
+
+	return xml.NewDecoder(resp.Body).Decode(out)
+	//generateXML(resp.Body)
 	return nil
-}
-
-// Envelope is a SOAP envelope.
-type Envelope struct {
-	XMLName      xml.Name `xml:"soapenv:Envelope"`
-	EnvelopeAttr string   `xml:"xmlns:soapenv,attr"`
-	NSAttr       string   `xml:"xmlns:xsd,attr"`
-	Header       Header   `xml:"soapenv:Header"`
-	Body         Body
-}
-
-
-type Header struct {
-	XMLName xml.Name `xml:"soapenv:Header"`
-}
-
-// Body is the body of a SOAP envelope.
-type Body struct {
-	XMLName xml.Name `xml:"soapenv:Body"`
-	Message Message
 }

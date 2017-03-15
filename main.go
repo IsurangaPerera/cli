@@ -1,32 +1,45 @@
 package main 
 
 import (
-	//"./wsdlgo"
+	"./wsdlgo"
 	"./soap"
-	//"./utils"
-	//"fmt"
+	"./utils"
+	"net/http"
+	"os"
+	//"net/url"
+	"fmt"
 )
+
+var client *http.Client
+var configFileExist bool
+
+func init() {
+
+	client, _ = soap.InitiateConnection()
+
+}
 
 func main() {
 
-	/*v := &wsdlgo.ListAllUsers{
+	fmt.Println(utils.CheckConfigFileExists())
+
+	v := &wsdlgo.ListAllUsers{
 		Filter: "*",
 		Limit : 10,
 	}
 
-	c := &soap.Client {
-		URL : "https://localhost:9443/services/UserAdmin.UserAdminHttpsSoap11Endpoint/",
+	st := &soap.Client{
+		C : client,
 	}
-
+	
 	u := &userAdminPortType{
-		cli: c,
+		cli: *st,
 	}
 
 	rep, err := u.ListAllUsers(v)
-	fmt.Println(err)
-	fmt.Println(rep)*/
-
-	soap.GetSessionCookie()
-
-
+	if err != nil {
+		fmt.Println("Error")
+		os.Exit(1)
+	}
+	fmt.Println(rep.Return)
 }
