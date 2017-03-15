@@ -22,12 +22,6 @@ type User struct {
 	Password string   `xml:"password"`
 }
 
-type ChangePassword struct {
-	XMLName     xml.Name `xml:"http://mgt.user.carbon.wso2.org changePassword" json:"-" yaml:"-"`
-	UserName    string   `xml:"xsd:userName,omitempty" json:"userName,omitempty" yaml:"userName,omitempty"`
-	NewPassword string   `xml:"newPassword,omitempty" json:"newPassword,omitempty" yaml:"newPassword,omitempty"`
-}
-
 var config_file_path string
 var q Configuration
 
@@ -92,6 +86,22 @@ func WriteBaseURL(url *string) {
 		generateXML(v)
 	}
 	
+}
+
+func WriteConfigInfo(username , pass, baseurl, soap11, soap12 *string) {
+	
+	//Not Handled
+	if CheckConfigFileExists() {
+
+	}else {
+		v := &Configuration{
+			BaseURL : *baseurl,
+			soap11  : *soap11,
+			soap12  : *soap12,
+			User : User{UserName: *username, Password: *password},
+		}
+		generateXML(v)
+	}
 }
 
 func UnmarshalConfig() {

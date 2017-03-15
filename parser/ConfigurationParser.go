@@ -27,7 +27,22 @@ func InitConfiguration() {
 		ParseBasicAuth()
 	case "base-url":
 		ParseBaseURL()
+	case "config":
+		ParseConfigurations()
 	}
+}
+
+func ParseConfigurations() {
+
+	userNamePtr := configCommand.String("username", "admin", "User Name")
+	userPassPtr := configCommand.String("password", "admin", "Password")
+	baseURLPtr  := configCommand.String("url", "", "Base URL of Identity Server")
+	soap11Ptr   := configCommand.String("soap11", "services/UserAdmin.UserAdminHttpsSoap11Endpoint/", "Soap 11 Endpoint")
+	soap12Ptr   := configCommand.String("soap12", "services/UserAdmin.UserAdminHttpsSoap12Endpoint/", "Soap 12 Endpoint")
+
+	configCommand.Parse(os.Args[2:])
+
+	utils.WriteConfigInfo(userNamePtr, userPassPtr, baseURLPtr, soap11, soap12)
 }
 
 func ParseBasicAuth() {

@@ -1,4 +1,7 @@
   <Configurations>
+  	<baseurl>
+  		https://localhost:9443/
+  	</baseurl>
   	<soap11>
   		services/UserAdmin.UserAdminHttpsSoap11Endpoint/
   	</soap11>
