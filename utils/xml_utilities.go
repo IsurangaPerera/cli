@@ -11,11 +11,9 @@ import (
 type Configuration struct {
 	XMLName xml.Name `xml:"Configurations"`
 	BaseURL string `xml:"baseurl"`
-	Users Users
-}
-
-type Users struct {
-	Users []User
+	User User 
+	Soap11 string `xml: "soap11"`
+	Soap12 string `xml: "soap12"`
 }
 
 type User struct {
@@ -31,12 +29,20 @@ type ChangePassword struct {
 }
 
 var config_file_path string
+var q Configuration
+
+func CheckConfigFilePath() {
+
+	if config_file_path == "" {
+		dir, _ := filepath.Abs(filepath.Dir(os.Args[0]))
+		config_file_path = dir+"/resources"+"/configurations.xml"
+	}
+	
+}
 
 func CheckConfigFileExists() bool {
 
-	dir, _ := filepath.Abs(filepath.Dir(os.Args[0]))
-
-	config_file_path = dir+"/resources"+"/configurations.xml"
+	CheckConfigFilePath()
 	
 	if _, err := os.Stat(config_file_path); os.IsNotExist(err) {
   		return false
@@ -65,14 +71,10 @@ func WriteBasicAuthInfo(username *string, password *string) {
 	//Not handled
 	if CheckConfigFileExists() {
 
-	} 
-	
-	else {
+	} else {
 
 		v := &Configuration{
-		    Users: Users{[]User{
-		        User{UserName: *username, Password: *password},
-		    }},
+		    User : User{UserName: *username, Password: *password},
 		}
 		
 		generateXML(v)
@@ -85,32 +87,56 @@ func WriteBaseURL(url *string) {
 	//Not Handled
 	if CheckConfigFileExists() {
 
-	}
-	
-	else {
+	}else {
 		v := &Configuration{BaseURL: *url}
 		generateXML(v)
 	}
 	
 }
 
-func GetBaseURL() *string {
+func UnmarshalConfig() {
 
-	dir, _ := filepath.Abs(filepath.Dir(os.Args[0]))
-
-	dir = dir+"/resources"+"/configurations.xml"
-
-	xmlFile, err := os.Open(dir)
+	xmlFile, err := os.Open(config_file_path)
 	
 	if err != nil {
 		fmt.Println("Error opening file:", err)
-		return nil
+		return
 	}
+	
 	defer xmlFile.Close()
 	b, _ := ioutil.ReadAll(xmlFile)
 
-	var q Configuration
 	xml.Unmarshal(b, &q)
+}
+
+func GetBaseURL() *string {
+
+	CheckConfigFilePath()
+	UnmarshalConfig()
 
 	return &q.BaseURL
+}
+
+func GetCredentials() (*string, *string) {
+
+	CheckConfigFilePath()
+	UnmarshalConfig()
+	
+	return &q.User.UserName, &q.User.Password
+}
+
+func GetSoap11EndPoint() string {
+
+	CheckConfigFilePath()
+	UnmarshalConfig()
+	
+	return (*GetBaseURL() + q.Soap11)
+}
+
+func GetSoap12EndPoint() string {
+
+	CheckConfigFilePath()
+	UnmarshalConfig()
+	
+	return (*GetBaseURL() + q.Soap12)
 }

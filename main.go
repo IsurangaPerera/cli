@@ -21,7 +21,7 @@ func init() {
 
 func main() {
 
-	fmt.Println(utils.CheckConfigFileExists())
+	utils.GetCredentials()
 
 	v := &wsdlgo.ListAllUsers{
 		Filter: "*",
@@ -31,6 +31,8 @@ func main() {
 	st := &soap.Client{
 		C : client,
 	}
+
+
 	
 	u := &userAdminPortType{
 		cli: *st,
