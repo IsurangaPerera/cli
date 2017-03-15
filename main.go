@@ -8,6 +8,7 @@ import (
 	"os"
 	//"net/url"
 	"fmt"
+	//"./parser"
 )
 
 var client *http.Client
@@ -16,10 +17,19 @@ var configFileExist bool
 func init() {
 
 	client, _ = soap.InitiateConnection()
+	//parser.InitConfiguration()
 
 }
 
 func main() {
+
+	if len(os.Args) <= 2 {
+		fmt.Println("Invalid Operation")
+		//os.Exit(1)
+	} else {
+
+		InitOperation(os.Args[1:])
+	}
 
 	utils.GetCredentials()
 
@@ -28,16 +38,9 @@ func main() {
 		Limit : 10,
 	}
 
-	st := &soap.Client{
-		C : client,
-	}
-
-
+	var st = soap.Client{C : client}
+	var u =  userAdminPortType{cli: st}
 	
-	u := &userAdminPortType{
-		cli: *st,
-	}
-
 	rep, err := u.ListAllUsers(v)
 	if err != nil {
 		fmt.Println("Error")

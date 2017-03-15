@@ -1,4 +1,4 @@
-package main
+package parser
 
 import (
 	"flag"
@@ -12,15 +12,7 @@ var basicAuthCommand = flag.NewFlagSet("basic-auth", flag.ExitOnError)
 var baseURLCommand = flag.NewFlagSet("base-url", flag.ExitOnError)
 var basicAuth bool
 
-func main() {
-	InitConfiguration()
-}
-
 func InitConfiguration() {
-	if len(os.Args) < 2 {
-		fmt.Println("missing file operand")
-		os.Exit(1)
-	}
 	
 	switch os.Args[1] {
 	case "basic-auth":
@@ -42,7 +34,7 @@ func ParseConfigurations() {
 
 	configCommand.Parse(os.Args[2:])
 
-	utils.WriteConfigInfo(userNamePtr, userPassPtr, baseURLPtr, soap11, soap12)
+	utils.WriteConfigInfo(userNamePtr, userPassPtr, baseURLPtr, soap11Ptr, soap12Ptr)
 }
 
 func ParseBasicAuth() {
