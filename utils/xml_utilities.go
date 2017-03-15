@@ -96,9 +96,9 @@ func WriteConfigInfo(username , pass, baseurl, soap11, soap12 *string) {
 	}else {
 		v := &Configuration{
 			BaseURL : *baseurl,
-			soap11  : *soap11,
-			soap12  : *soap12,
-			User : User{UserName: *username, Password: *password},
+			Soap11  : *soap11,
+			Soap12  : *soap12,
+			User : User{UserName: *username, Password: *pass},
 		}
 		generateXML(v)
 	}
