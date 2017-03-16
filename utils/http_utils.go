@@ -8,7 +8,7 @@ import (
 
 )
 
-func formatRequest(r *http.Request) {
+func FormatRequest(r *http.Request) {
 
 	var request []string
 

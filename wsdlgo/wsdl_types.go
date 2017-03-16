@@ -154,8 +154,8 @@ type DeleteRole struct {
 
 // DeleteUser
 type DeleteUser struct {
-	XMLName  xml.Name `xml:"http://mgt.user.carbon.wso2.org deleteUser" json:"-" yaml:"-"`
-	UserName string   `xml:"userName,omitempty" json:"userName,omitempty" yaml:"userName,omitempty"`
+	XMLName  xml.Name `xml:"http://mgt.user.carbon.wso2.org xsd:deleteUser" json:"-" yaml:"-"`
+	UserName string   `xml:"xsd:userName,omitempty" json:"userName,omitempty" yaml:"userName,omitempty"`
 }
 
 // GetAllPermittedRoleNames

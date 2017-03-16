@@ -49,7 +49,7 @@ type Client struct {
 	C *http.Client
 }
 
-func generateXML(v *Body) {
+func generateXML(v *Envelope) {
 
 	dir, _ := filepath.Abs(filepath.Dir(os.Args[0]))
 

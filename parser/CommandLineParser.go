@@ -29,7 +29,7 @@ func ParseAddInternalRole(args[] string ,u UserAdminPortType) {
 	userListPtr     := addInternalRoleCommand.String("user-list", "", "User List")
 	permissionsPtr  := addInternalRoleCommand.String("permissions", "", "User Permissions")
 
-	addInternalRoleCommand.Parse(args[0:])
+	addInternalRoleCommand.Parse(args[1:])
 
 	v := &wsdlgo.AddInternalRole{
 		RoleName    : *roleNamePtr,
@@ -46,7 +46,7 @@ func ParseAddRemoveRolesOfUser(args[] string, u UserAdminPortType){
 	newRolesPtr      := addRemoveRolesOfUserCommand.String("new-roles", "", "New Roles")
 	deletedRolesPtr  := addRemoveRolesOfUserCommand.String("deleted-roles", "", "Deleted Roles")
 
-	addRemoveRolesOfUserCommand.Parse(args[0:])
+	addRemoveRolesOfUserCommand.Parse(args[1:])
 
 	v := &wsdlgo.AddRemoveRolesOfUser{
 		UserName     : *userNamePtr,
@@ -61,7 +61,7 @@ func ParseDeleteUser(args[] string, u UserAdminPortType) {
 
 	userNamePtr      := addRemoveRolesOfUserCommand.String("user-name", "", "User Name")
 
-	addRemoveRolesOfUserCommand.Parse(args[0:])
+	addRemoveRolesOfUserCommand.Parse(args[1:])
 
 	v := &wsdlgo.DeleteUser{
 		UserName     : *userNamePtr,
