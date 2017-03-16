@@ -23,7 +23,7 @@ Following attributes should be set inorder to run properly
 * **Soap11 Endpoint** (eg. services/UserAdmin.UserAdminHttpsSoap11Endpoint/)
 * **Soap12 Endpoint** (eg. services/UserAdmin.UserAdminHttpsSoap12Endpoint/)
 ```sh
-$ cli config --base-url [base_url] --user-name [user_name]                            --password [password] --soap11 [soap11_endpoint]                         --soap12 [soap12_endpoint]
+$ cli config --base-url [base_url] --user-name [user_name] --password [password] --soap11 [soap11_endpoint] --soap12 [soap12_endpoint]
 ```
 
 ### Usage
