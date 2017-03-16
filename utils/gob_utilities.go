@@ -24,9 +24,6 @@ type User struct {
 var config_file_path string
 var q Configuration
 
-
-
-
 func getGobFile() *string {
 
 	dir, _ := filepath.Abs(filepath.Dir(os.Args[0]))
@@ -98,7 +95,7 @@ func WriteBaseURL(url *string) {
 		Check(err)
 	}
 	
-	datafrom.BaseURL = *url
+	datafrom.BaseURL = "https://"+*url+"/"
 
 	SerializeData(datafrom)
 
