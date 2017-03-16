@@ -70,7 +70,8 @@ func GenerateOneWaySoapRequest(in Message) *Envelope {
 func setHeaders(r *http.Request, action string) {
 
 	r.Header.Set("Content-Type", "text/xml")
-	r.Header.Set("SOAPAction", `"urn:listAllUsers"`)
+	action = `"urn:`+ action + `"`
+	r.Header.Set("SOAPAction", action)
 }
 
 func  CreateBasicAuthRequest(r* http.Request) {
