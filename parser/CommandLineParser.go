@@ -8,7 +8,9 @@ import (
 
 var addInternalRoleCommand = flag.NewFlagSet("addInternalRole", flag.ExitOnError)
 var addRemoveRolesOfUserCommand = flag.NewFlagSet("addRemoveRolesOfUser", flag.ExitOnError)
+var addRemoveUsersOfRoleCommand = flag.NewFlagSet("addRemoveUsersOfRole", flag.ExitOnError)
 var deleteUserCommand = flag.NewFlagSet("deleteUser", flag.ExitOnError)
+var addRoleCommand = flag.NewFlagSet("addRole" , flag.ExitOnError)
 
 func InitOperation(args[] string, u UserAdminPortType) {
 
@@ -18,6 +20,8 @@ func InitOperation(args[] string, u UserAdminPortType) {
 		ParseAddInternalRole(args, u)
 	case "addRemoveRolesOfUser":
 		ParseAddRemoveRolesOfUser(args, u)
+	case "addRemoveUsersOfRole":
+		ParseAddRemoveUsersOfRole(args, u)
 	case "deleteUser":
 		ParseDeleteUser(args, u)
 	}
@@ -55,6 +59,42 @@ func ParseAddRemoveRolesOfUser(args[] string, u UserAdminPortType){
 	}
 
 	u.AddRemoveRolesOfUser(v)
+}
+
+func ParseAddRemoveUsersOfRole(args[] string, u UserAdminPortType){
+
+	roleNamePtr      := addRemoveRolesOfUserCommand.String("role-name", "", "User Name")
+	newUsersPtr      := addRemoveRolesOfUserCommand.String("new-users", "", "New Roles")
+	deletedUsersPtr  := addRemoveRolesOfUserCommand.String("deleted-users", " ", "Deleted Roles")
+
+	addRemoveUsersOfRoleCommand.Parse(args[1:])
+
+	v := &wsdlgo.AddRemoveUsersOfRole{
+		RoleName     : *roleNamePtr,
+		NewUsers     : strings.Split(*newUsersPtr, " "),
+		DeletedUsers : strings.Split(*deletedUsersPtr, " "),
+	}
+
+	u.AddRemoveUsersOfRole(v)
+}
+
+func ParseAddRole(args[] string, u UserAdminPortType){
+
+	roleNamePtr      := addRoleCommand.String("role-name", "", "User Name")
+	userListPtr      := addRoleCommand.String("user-list", "", "New Roles")
+	permissionsPtr   := addRoleCommand.String("permissions", " ", "Deleted Roles")
+	isSharedPtr		 := addRoleCommand.Bool("shared", false, "IsShared")
+	
+	addRoleCommand.Parse(args[1:])
+
+	v := &wsdlgo.AddRole{
+		RoleName     : *roleNamePtr,
+		UserList     : strings.Split(*userListPtr, " "),
+		Permissions  : strings.Split(*permissionsPtr, " "),
+		IsSharedRole : *isSharedPtr,
+	}
+
+	u.AddRole(v)
 }
 
 func ParseDeleteUser(args[] string, u UserAdminPortType) {

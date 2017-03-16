@@ -68,7 +68,7 @@ func generateXML(v *wsdlgo.Envelope) {
 	_, err = f.Write(output)
 }
 
-func (m *Client) OneWayTrip(in Message, action string, v wsdlgo.Envelope) error {
+func (m *Client) OneWayTrip(in Message, action string) error {
 	
 	c := m.C
 	req := GenerateOneWaySoapRequest(in)

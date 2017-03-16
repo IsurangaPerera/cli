@@ -1,8 +1,0 @@
-  <Envelope>
-      <Body>
-          <Fault>
-              <faultcode></faultcode>
-              <faultstring></faultstring>
-          </Fault>
-      </Body>
-  </Envelope>

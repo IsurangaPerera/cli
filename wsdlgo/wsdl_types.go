@@ -108,7 +108,7 @@ type AddInternalRole struct {
 
 // AddRemoveRolesOfUser
 type AddRemoveRolesOfUser struct {
-	XMLName      xml.Name `xml:"xsd:AddRemoveRolesOfUser" json:"-" yaml:"-"`
+	XMLName      xml.Name `xml:"xsd:addRemoveRolesOfUser" json:"-" yaml:"-"`
 	UserName     string   `xml:"xsd:userName,omitempty" json:"userName,omitempty" yaml:"userName,omitempty"`
 	NewRoles     []string `xml:"xsd:newRoles,omitempty" json:"newRoles,omitempty" yaml:"newRoles,omitempty"`
 	DeletedRoles []string `xml:"xsd:deletedRoles,omitempty" json:"deletedRoles,omitempty" yaml:"deletedRoles,omitempty"`
@@ -116,7 +116,7 @@ type AddRemoveRolesOfUser struct {
 
 // AddRemoveUsersOfRole
 type AddRemoveUsersOfRole struct {
-	XMLName      xml.Name `xml:"xsd:AddRemoveUsersOfRole" json:"-" yaml:"-"`
+	XMLName      xml.Name `xml:"xsd:addRemoveUsersOfRole" json:"-" yaml:"-"`
 	RoleName     string   `xml:"xsd:roleName,omitempty" json:"roleName,omitempty" yaml:"roleName,omitempty"`
 	NewUsers     []string `xml:"xsd:newUsers,omitempty" json:"newUsers,omitempty" yaml:"newUsers,omitempty"`
 	DeletedUsers []string `xml:"xsd:deletedUsers,omitempty" json:"deletedUsers,omitempty" yaml:"deletedUsers,omitempty"`
