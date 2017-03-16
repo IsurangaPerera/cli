@@ -6,19 +6,17 @@ import (
 )
 
 type Envelope struct {
-	XMLName      xml.Name `xml:"soapenv:Envelope"`
-	EnvelopeAttr string   `xml:"xmlns:soapenv,attr"`
-	NSAttr       string   `xml:"xmlns:xsd,attr"`
+	XMLName      xml.Name 
 	Body         Body
 }
 
 type Body struct {
-	XMLName xml.Name `xml:"soapenv:Body"`
-	Fault   Fault
+	XMLName xml.Name 
+	Fault   Fault    `xml:"Fault"`
 }
 
 type Fault struct {
-	XMLName      xml.Name `xml:"soapenv:Fault"`
+	XMLName      xml.Name `xml:"Fault"`
 	FaultCode    string   `xml:"faultcode"`
 	FaultString  string   `xml:"faultstring"`
 	Details      Message  `xml:"detail"`

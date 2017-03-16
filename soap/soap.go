@@ -50,7 +50,7 @@ type Client struct {
 	C *http.Client
 }
 
-func generateXML(v *Envelope) {
+func generateXML(v *wsdlgo.Envelope) {
 
 	dir, _ := filepath.Abs(filepath.Dir(os.Args[0]))
 
@@ -69,17 +69,15 @@ func generateXML(v *Envelope) {
 }
 
 func (m *Client) OneWayTrip(in Message, action string, v wsdlgo.Envelope) error {
-
 	
 	c := m.C
 	req := GenerateOneWaySoapRequest(in)
-	generateXML(req)
 
 	var b bytes.Buffer
 
 	err := xml.NewEncoder(&b).Encode(req)
 	if err != nil {
-		return err
+		return nil
 	}
 
 	r, err := http.NewRequest("POST", URL, &b)
@@ -94,20 +92,21 @@ func (m *Client) OneWayTrip(in Message, action string, v wsdlgo.Envelope) error 
 
 	resp, err := c.Do(r)
 	if err != nil {
-		return err
+		return nil	
 	}
 
 	defer resp.Body.Close()
+	var body []byte
 	if resp.StatusCode != http.StatusOK {
-		// read only the first Mb of the body in error case
-		limReader := io.LimitReader(resp.Body, 1024*1024)
-		body, _ := ioutil.ReadAll(limReader)
-		fmt.Println(fmt.Errorf("%q: %q", resp.Status, body))
-	}
+		body, _ = ioutil.ReadAll(resp.Body)
+	} 
 
-	fmt.Println(xml.NewDecoder(resp.Body).Decode(&v))
+	q := &wsdlgo.Envelope{}
+	_ = xml.Unmarshal(body, q)
 
+	fmt.Println(q.Body.Fault.FaultString)
 	return nil
+
 }
  
 func (m *Client) RoundTrip(in, out Message) error {
