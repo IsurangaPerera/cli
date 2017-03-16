@@ -50,7 +50,7 @@ type Client struct {
 	C *http.Client
 }
 
-func generateXML(v *wsdlgo.Envelope) {
+func GenerateXML(v *wsdlgo.AddRole) {
 
 	dir, _ := filepath.Abs(filepath.Dir(os.Args[0]))
 
@@ -72,6 +72,7 @@ func (m *Client) OneWayTrip(in Message, action string) error {
 	
 	c := m.C
 	req := GenerateOneWaySoapRequest(in)
+	
 
 	var b bytes.Buffer
 

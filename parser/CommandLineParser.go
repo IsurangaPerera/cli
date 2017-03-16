@@ -4,6 +4,7 @@ import (
 	"flag"
 	"strings"
 	"../wsdlgo"
+	"strconv"
 )
 
 var addInternalRoleCommand = flag.NewFlagSet("addInternalRole", flag.ExitOnError)
@@ -22,6 +23,8 @@ func InitOperation(args[] string, u UserAdminPortType) {
 		ParseAddRemoveRolesOfUser(args, u)
 	case "addRemoveUsersOfRole":
 		ParseAddRemoveUsersOfRole(args, u)
+	case "addRole":
+		ParseAddRole(args, u)
 	case "deleteUser":
 		ParseDeleteUser(args, u)
 	}
@@ -80,10 +83,12 @@ func ParseAddRemoveUsersOfRole(args[] string, u UserAdminPortType){
 
 func ParseAddRole(args[] string, u UserAdminPortType){
 
-	roleNamePtr      := addRoleCommand.String("role-name", "", "User Name")
-	userListPtr      := addRoleCommand.String("user-list", "", "New Roles")
-	permissionsPtr   := addRoleCommand.String("permissions", " ", "Deleted Roles")
-	isSharedPtr		 := addRoleCommand.Bool("shared", false, "IsShared")
+	flag := false
+
+	roleNamePtr      := addRoleCommand.String("role-name", "", "Role Name")
+	userListPtr      := addRoleCommand.String("user-list", "", "User List")
+	permissionsPtr   := addRoleCommand.String("permissions", "*", "Permissions")
+	isSharedPtr	     := addRoleCommand.Bool("shared", flag, "IsShared")
 	
 	addRoleCommand.Parse(args[1:])
 
@@ -91,7 +96,7 @@ func ParseAddRole(args[] string, u UserAdminPortType){
 		RoleName     : *roleNamePtr,
 		UserList     : strings.Split(*userListPtr, " "),
 		Permissions  : strings.Split(*permissionsPtr, " "),
-		IsSharedRole : *isSharedPtr,
+		IsSharedRole : strconv.FormatBool(*isSharedPtr),
 	}
 
 	u.AddRole(v)

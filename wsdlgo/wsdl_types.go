@@ -128,7 +128,7 @@ type AddRole struct {
 	RoleName     string   `xml:"xsd:roleName,omitempty" json:"roleName,omitempty" yaml:"roleName,omitempty"`
 	UserList     []string `xml:"xsd:userList,omitempty" json:"userList,omitempty" yaml:"userList,omitempty"`
 	Permissions  []string `xml:"xsd:permissions,omitempty" json:"permissions,omitempty" yaml:"permissions,omitempty"`
-	IsSharedRole bool     `xml:"xsd:isSharedRole,omitempty" json:"isSharedRole,omitempty" yaml:"isSharedRole,omitempty"`
+	IsSharedRole string    `xml:"xsd:isSharedRole,omitempty" json:"isSharedRole,omitempty" yaml:"isSharedRole,omitempty"`
 }
 
 // AddUser
