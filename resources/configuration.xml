@@ -1,8 +1,0 @@
-  <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://org.apache.axis2/xsd">
-      <soapenv:Header></soapenv:Header>
-      <soapenv:Body>
-          <xsd:deleteUser xmlns="http://mgt.user.carbon.wso2.org">
-              <xsd:userName>isuranga</xsd:userName>
-          </xsd:deleteUser>
-      </soapenv:Body>
-  </soapenv:Envelope>
