@@ -44,7 +44,7 @@ func ParseAddRemoveRolesOfUser(args[] string, u UserAdminPortType){
 
 	userNamePtr      := addRemoveRolesOfUserCommand.String("user-name", "", "User Name")
 	newRolesPtr      := addRemoveRolesOfUserCommand.String("new-roles", "", "New Roles")
-	deletedRolesPtr  := addRemoveRolesOfUserCommand.String("deleted-roles", "", "Deleted Roles")
+	deletedRolesPtr  := addRemoveRolesOfUserCommand.String("deleted-roles", " ", "Deleted Roles")
 
 	addRemoveRolesOfUserCommand.Parse(args[1:])
 

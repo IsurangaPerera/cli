@@ -5,6 +5,27 @@ import (
 	"encoding/xml"
 )
 
+type Envelope struct {
+	XMLName      xml.Name `xml:"soapenv:Envelope"`
+	EnvelopeAttr string   `xml:"xmlns:soapenv,attr"`
+	NSAttr       string   `xml:"xmlns:xsd,attr"`
+	Body         Body
+}
+
+type Body struct {
+	XMLName xml.Name `xml:"soapenv:Body"`
+	Fault   Fault
+}
+
+type Fault struct {
+	XMLName      xml.Name `xml:"soapenv:Fault"`
+	FaultCode    string   `xml:"faultcode"`
+	FaultString  string   `xml:"faultstring"`
+	Details      Message  `xml:"detail"`
+}
+
+type Message interface{}
+
 // ClaimValue
 type ClaimValue struct {
 	ClaimURI string `xml:"claimURI,omitempty" json:"claimURI,omitempty" yaml:"claimURI,omitempty"`
@@ -81,35 +102,35 @@ type UserStoreInfo struct {
 
 // AddInternalRole
 type AddInternalRole struct {
-	XMLName     xml.Name `xml:"http://mgt.user.carbon.wso2.org addInternalRole" json:"-" yaml:"-"`
-	RoleName    string   `xml:"roleName,omitempty" json:"roleName,omitempty" yaml:"roleName,omitempty"`
-	UserList    []string `xml:"userList,omitempty" json:"userList,omitempty" yaml:"userList,omitempty"`
-	Permissions []string `xml:"permissions,omitempty" json:"permissions,omitempty" yaml:"permissions,omitempty"`
+	XMLName     xml.Name `xml:"xsd:addInternalRole" json:"-" yaml:"-"`
+	RoleName    string   `xml:"xsd:roleName,omitempty" json:"roleName,omitempty" yaml:"roleName,omitempty"`
+	UserList    []string `xml:"xsd:userList,omitempty" json:"userList,omitempty" yaml:"userList,omitempty"`
+	Permissions []string `xml:"xsd:permissions,omitempty" json:"permissions,omitempty" yaml:"permissions,omitempty"`
 }
 
 // AddRemoveRolesOfUser
 type AddRemoveRolesOfUser struct {
-	XMLName      xml.Name `xml:"http://mgt.user.carbon.wso2.org addRemoveRolesOfUser" json:"-" yaml:"-"`
-	UserName     string   `xml:"userName,omitempty" json:"userName,omitempty" yaml:"userName,omitempty"`
-	NewRoles     []string `xml:"newRoles,omitempty" json:"newRoles,omitempty" yaml:"newRoles,omitempty"`
-	DeletedRoles []string `xml:"deletedRoles,omitempty" json:"deletedRoles,omitempty" yaml:"deletedRoles,omitempty"`
+	XMLName      xml.Name `xml:"xsd:AddRemoveRolesOfUser" json:"-" yaml:"-"`
+	UserName     string   `xml:"xsd:userName,omitempty" json:"userName,omitempty" yaml:"userName,omitempty"`
+	NewRoles     []string `xml:"xsd:newRoles,omitempty" json:"newRoles,omitempty" yaml:"newRoles,omitempty"`
+	DeletedRoles []string `xml:"xsd:deletedRoles,omitempty" json:"deletedRoles,omitempty" yaml:"deletedRoles,omitempty"`
 }
 
 // AddRemoveUsersOfRole
 type AddRemoveUsersOfRole struct {
-	XMLName      xml.Name `xml:"http://mgt.user.carbon.wso2.org addRemoveUsersOfRole" json:"-" yaml:"-"`
-	RoleName     string   `xml:"roleName,omitempty" json:"roleName,omitempty" yaml:"roleName,omitempty"`
-	NewUsers     []string `xml:"newUsers,omitempty" json:"newUsers,omitempty" yaml:"newUsers,omitempty"`
-	DeletedUsers []string `xml:"deletedUsers,omitempty" json:"deletedUsers,omitempty" yaml:"deletedUsers,omitempty"`
+	XMLName      xml.Name `xml:"xsd:AddRemoveUsersOfRole" json:"-" yaml:"-"`
+	RoleName     string   `xml:"xsd:roleName,omitempty" json:"roleName,omitempty" yaml:"roleName,omitempty"`
+	NewUsers     []string `xml:"xsd:newUsers,omitempty" json:"newUsers,omitempty" yaml:"newUsers,omitempty"`
+	DeletedUsers []string `xml:"xsd:deletedUsers,omitempty" json:"deletedUsers,omitempty" yaml:"deletedUsers,omitempty"`
 }
 
 // AddRole
 type AddRole struct {
-	XMLName      xml.Name `xml:"http://mgt.user.carbon.wso2.org addRole" json:"-" yaml:"-"`
-	RoleName     string   `xml:"roleName,omitempty" json:"roleName,omitempty" yaml:"roleName,omitempty"`
-	UserList     []string `xml:"userList,omitempty" json:"userList,omitempty" yaml:"userList,omitempty"`
-	Permissions  []string `xml:"permissions,omitempty" json:"permissions,omitempty" yaml:"permissions,omitempty"`
-	IsSharedRole bool     `xml:"isSharedRole,omitempty" json:"isSharedRole,omitempty" yaml:"isSharedRole,omitempty"`
+	XMLName      xml.Name `xml:"xsd:addRole" json:"-" yaml:"-"`
+	RoleName     string   `xml:"xsd:roleName,omitempty" json:"roleName,omitempty" yaml:"roleName,omitempty"`
+	UserList     []string `xml:"xsd:userList,omitempty" json:"userList,omitempty" yaml:"userList,omitempty"`
+	Permissions  []string `xml:"xsd:permissions,omitempty" json:"permissions,omitempty" yaml:"permissions,omitempty"`
+	IsSharedRole bool     `xml:"xsd:isSharedRole,omitempty" json:"isSharedRole,omitempty" yaml:"isSharedRole,omitempty"`
 }
 
 // AddUser

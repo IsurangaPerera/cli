@@ -10,6 +10,7 @@ import (
 	"net/url"
 	"os"
 	"path/filepath"
+	"../wsdlgo"
 )
 
 type RoundTripper interface {
@@ -67,10 +68,12 @@ func generateXML(v *Envelope) {
 	_, err = f.Write(output)
 }
 
-func (m *Client) OneWayTrip(in Message, action string) error {
+func (m *Client) OneWayTrip(in Message, action string, v wsdlgo.Envelope) error {
 
+	
 	c := m.C
 	req := GenerateOneWaySoapRequest(in)
+	generateXML(req)
 
 	var b bytes.Buffer
 
@@ -89,10 +92,20 @@ func (m *Client) OneWayTrip(in Message, action string) error {
 	u, _ := url.Parse(URL)
 	r.AddCookie(c.Jar.Cookies(u)[0])
 
-	_, err = c.Do(r)
+	resp, err := c.Do(r)
 	if err != nil {
 		return err
 	}
+
+	defer resp.Body.Close()
+	if resp.StatusCode != http.StatusOK {
+		// read only the first Mb of the body in error case
+		limReader := io.LimitReader(resp.Body, 1024*1024)
+		body, _ := ioutil.ReadAll(limReader)
+		fmt.Println(fmt.Errorf("%q: %q", resp.Status, body))
+	}
+
+	fmt.Println(xml.NewDecoder(resp.Body).Decode(&v))
 
 	return nil
 }

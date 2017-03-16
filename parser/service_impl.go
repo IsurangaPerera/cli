@@ -42,7 +42,7 @@ type UserAdminType interface {
 // AddInternalRole
 func (p *UserAdminPortType) AddInternalRole(α *wsdlgo.AddInternalRole) (err error){
 	
-	if err = p.Cli.OneWayTrip(α, "addInternalRole"); err != nil {
+	if err = p.Cli.OneWayTrip(α, "addInternalRole", wsdlgo.Envelope{}); err != nil {
 		return err
 	}
 	return nil
@@ -51,7 +51,7 @@ func (p *UserAdminPortType) AddInternalRole(α *wsdlgo.AddInternalRole) (err err
 // AddRemoveRolesOfUser
 func (p *UserAdminPortType) AddRemoveRolesOfUser(α *wsdlgo.AddRemoveRolesOfUser) (err error) {
 	
-	if err = p.Cli.OneWayTrip(α, "addRemoveRolesOfUser"); err != nil {
+	if err = p.Cli.OneWayTrip(α, "addRemoveRolesOfUser", wsdlgo.Envelope{}); err != nil {
 			return err
 	}
 	return nil
@@ -90,7 +90,7 @@ func ChangePasswordByUser(ctx context.Context, parameters *wsdlgo.ChangePassword
 // DeleteRole
 func (p *UserAdminPortType) DeleteRole(α *wsdlgo.DeleteRole) (err error) {
 	
-	if err = p.Cli.OneWayTrip(α, "deleteRole"); err != nil {
+	if err = p.Cli.OneWayTrip(α, "deleteRole", wsdlgo.Envelope{}); err != nil {
 			return err
 	}
 	return nil
@@ -99,7 +99,7 @@ func (p *UserAdminPortType) DeleteRole(α *wsdlgo.DeleteRole) (err error) {
 // DeleteUser
 func (p *UserAdminPortType) DeleteUser(α *wsdlgo.DeleteUser) (err error) {
 	
-	if err = p.Cli.OneWayTrip(α, "deleteUser"); err != nil {
+	if err = p.Cli.OneWayTrip(α, "deleteUser", wsdlgo.Envelope{}); err != nil {
 			return err
 	}
 	return nil
