@@ -34,5 +34,6 @@ CLI is currently extended with the following capabilities.
 | ------ | ------ |
 | addInternalRole | **[role-name] [user-list] [permissions]** |
 | addRemoveRolesOfUser | **[user-name] [new-roles] [deleted-roles]** |
-
+| addRemoveUsersOfRole | **[role-name] [new-users] [deleted-users]** |
+| addRole | **[role-name] [user-list] [permissions] [shared]** |
 
