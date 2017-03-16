@@ -1,15 +1,17 @@
 package main 
 
 import (
-	"./wsdlgo"
+
 	"./soap"
-	"./utils"
+	"./parser"
 	"net/http"
 	"os"
-	//"net/url"
 	"fmt"
-	"./parser"
 )
+
+type userAdminPortType struct {
+	Cli soap.Client
+}
 
 var client *http.Client
 var configFileExist bool
@@ -25,26 +27,11 @@ func main() {
 
 	if len(os.Args) <= 2 {
 		fmt.Println("Invalid Operation")
-		//os.Exit(1)
-	} else {
-
-		parser.InitOperation(os.Args[1:])
-	}
-
-	utils.GetCredentials()
-
-	v := &wsdlgo.ListAllUsers{
-		Filter: "*",
-		Limit : 10,
-	}
+		os.Exit(1)
+	} 
 
 	var st = soap.Client{C : client}
-	var u =  userAdminPortType{cli: st}
-	
-	rep, err := u.ListAllUsers(v)
-	if err != nil {
-		fmt.Println("Error")
-		os.Exit(1)
-	}
-	fmt.Println(rep.Return)
+	var u =  parser.UserAdminPortType{Cli: st}
+
+	parser.InitOperation(os.Args[1:], u)
 }

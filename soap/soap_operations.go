@@ -47,6 +47,32 @@ func InitiateConnection() (c *http.Client, err error){
 
 }
 
+func GenerateOneWaySoapRequest(in Message) *Envelope {
+
+	req := &Envelope{
+		EnvelopeAttr : "",
+		NSAttr       : "",
+		Header       : Header{},
+		Body         : Body{Message: in},
+	}
+	
+	if req.EnvelopeAttr == "" {
+		req.EnvelopeAttr = "http://schemas.xmlsoap.org/soap/envelope/"
+	}
+	
+	if req.NSAttr == "" {
+		req.NSAttr = "http://org.apache.axis2/xsd"
+	}
+
+	return req
+}
+
+func setHeaders(r *http.Request, action string) {
+
+	r.Header.Set("Content-Type", "text/xml")
+	r.Header.Set("SOAPAction", `"urn:listAllUsers"`)
+}
+
 func  CreateBasicAuthRequest(r* http.Request) {
 	
 	r.SetBasicAuth("admin", "admin")//need to be changed

@@ -10,21 +10,20 @@ var addInternalRoleCommand = flag.NewFlagSet("addInternalRole", flag.ExitOnError
 var addRemoveRolesOfUserCommand = flag.NewFlagSet("addRemoveRolesOfUser", flag.ExitOnError)
 var deleteUserCommand = flag.NewFlagSet("deleteUser", flag.ExitOnError)
 
-func InitOperation(args[] string) {
+func InitOperation(args[] string, u UserAdminPortType) {
 
 	switch args[0] {
 	
 	case "addInternalRole":
-		ParseAddInternalRole(args)
+		ParseAddInternalRole(args, u)
 	case "addRemoveRolesOfUser":
-		ParseAddRemoveRolesOfUser(args)
+		ParseAddRemoveRolesOfUser(args, u)
 	case "deleteUser":
-		ParseDeleteUser(args)
-	
+		ParseDeleteUser(args, u)
 	}
 }
 
-func ParseAddInternalRole(args[] string) *wsdlgo.AddInternalRole {
+func ParseAddInternalRole(args[] string ,u UserAdminPortType) {
 	
 	roleNamePtr     := addInternalRoleCommand.String("role-name", "admin", "Role Name")
 	userListPtr     := addInternalRoleCommand.String("user-list", "", "User List")
@@ -38,10 +37,10 @@ func ParseAddInternalRole(args[] string) *wsdlgo.AddInternalRole {
 		Permissions : strings.Split(*permissionsPtr, " "),
 	}
 
-	return v
+	u.AddInternalRole(v)
 }
 
-func ParseAddRemoveRolesOfUser(args[] string) *wsdlgo.AddRemoveRolesOfUser {
+func ParseAddRemoveRolesOfUser(args[] string, u UserAdminPortType){
 
 	userNamePtr      := addRemoveRolesOfUserCommand.String("user-name", "", "User Name")
 	newRolesPtr      := addRemoveRolesOfUserCommand.String("new-roles", "", "New Roles")
@@ -55,10 +54,10 @@ func ParseAddRemoveRolesOfUser(args[] string) *wsdlgo.AddRemoveRolesOfUser {
 		DeletedRoles : strings.Split(*deletedRolesPtr, " "),
 	}
 
-	return v
+	u.AddRemoveRolesOfUser(v)
 }
 
-func ParseDeleteUser(args[] string) *wsdlgo.DeleteUser {
+func ParseDeleteUser(args[] string, u UserAdminPortType) {
 
 	userNamePtr      := addRemoveRolesOfUserCommand.String("user-name", "", "User Name")
 
@@ -68,5 +67,5 @@ func ParseDeleteUser(args[] string) *wsdlgo.DeleteUser {
 		UserName     : *userNamePtr,
 	}
 
-	return v
+	u.DeleteUser(v)
 }

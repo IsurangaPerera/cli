@@ -67,6 +67,36 @@ func generateXML(v *Body) {
 	_, err = f.Write(output)
 }
 
+func (m *Client) OneWayTrip(in Message, action string) error {
+
+	c := m.C
+	req := GenerateOneWaySoapRequest(in)
+
+	var b bytes.Buffer
+
+	err := xml.NewEncoder(&b).Encode(req)
+	if err != nil {
+		return err
+	}
+
+	r, err := http.NewRequest("POST", URL, &b)
+	if err != nil {
+		return err
+	}
+
+	setHeaders(r, action)
+
+	u, _ := url.Parse(URL)
+	r.AddCookie(c.Jar.Cookies(u)[0])
+
+	_, err = c.Do(r)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+ 
 func (m *Client) RoundTrip(in, out Message) error {
 
 	c := m.C
