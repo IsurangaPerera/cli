@@ -7,6 +7,7 @@ import (
 	"crypto/tls"
 	"net/url"
 	"os"
+	"../utils"
 )
 
 var URL = "https://localhost:9443/services/UserAdmin.UserAdminHttpsSoap11Endpoint/"
@@ -76,5 +77,6 @@ func setHeaders(r *http.Request, action string) {
 
 func  CreateBasicAuthRequest(r* http.Request) {
 	
-	r.SetBasicAuth("admin", "admin")//need to be changed
+	username, password := utils.GetCredentials()
+	r.SetBasicAuth(*username, *password)
 }
