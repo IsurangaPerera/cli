@@ -139,9 +139,13 @@ func (m *Client) RoundTrip(in, out Message, action string) error {
 	defer resp.Body.Close()
 	var body []byte
 	if resp.StatusCode != http.StatusOK {
-		fmt.Println("HJK")
 		body, _ = ioutil.ReadAll(resp.Body)
-		fmt.Println("%q: %q", resp.Status, body)
+		q := &wsdlgo.Envelope{}
+		_ = xml.Unmarshal(body, q)
+
+		fmt.Println(q.Body.Fault.FaultString)
+
+		return nil
 	}
 	body, _ = ioutil.ReadAll(resp.Body)
 
