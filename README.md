@@ -37,3 +37,11 @@ CLI is currently extended with the following capabilities.
 | addRemoveUsersOfRole | **[role-name] [new-users] [deleted-users]** |
 | addRole | **[role-name] [user-list] [permissions] [shared]** |
 
+### Samples
+
+***Add Internal Method***
+
+```sh
+$ cli addInternalRole --role-name sample --user-list isuranga 
+```
+
