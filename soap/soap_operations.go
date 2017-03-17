@@ -48,7 +48,7 @@ func InitiateConnection() (c *http.Client, err error){
 
 }
 
-func GenerateOneWaySoapRequest(in Message) *Envelope {
+func GenerateSoapRequest(in Message) *Envelope {
 
 	req := &Envelope{
 		EnvelopeAttr : "",

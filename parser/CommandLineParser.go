@@ -13,6 +13,8 @@ var addRemoveUsersOfRoleCommand = flag.NewFlagSet("addRemoveUsersOfRole", flag.E
 var deleteUserCommand = flag.NewFlagSet("deleteUser", flag.ExitOnError)
 var addRoleCommand = flag.NewFlagSet("addRole" , flag.ExitOnError)
 
+var listAllUsersCommand = flag.NewFlagSet("listAllUsers", flag.ExitOnError)
+
 func InitOperation(args[] string, u UserAdminPortType) {
 
 	switch args[0] {
@@ -27,6 +29,8 @@ func InitOperation(args[] string, u UserAdminPortType) {
 		ParseAddRole(args, u)
 	case "deleteUser":
 		ParseDeleteUser(args, u)
+	case "listAllUsers":
+		ParseListAllUsers(args, u)
 	}
 }
 
@@ -113,4 +117,19 @@ func ParseDeleteUser(args[] string, u UserAdminPortType) {
 	}
 
 	u.DeleteUser(v)
+}
+
+func ParseListAllUsers(args[] string, u UserAdminPortType) {
+
+	filterPtr := listAllUsersCommand.String("filter", "*", "Filter")
+	limitPtr  := listAllUsersCommand.Int("limit", 100, "Limit")
+
+	listAllUsersCommand.Parse(args[1:])
+
+	v := &wsdlgo.ListAllUsers{
+		Filter : *filterPtr,
+		Limit  : strconv.Itoa(*limitPtr),
+	}
+
+	u.ListAllUsers(v)
 }

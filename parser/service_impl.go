@@ -7,6 +7,8 @@ import (
 "encoding/xml"
 "../wsdlgo"
 "context"
+"fmt"
+"reflect"
 )
 
 var Namespace = "http://mgt.user.carbon.wso2.org"
@@ -15,9 +17,9 @@ type UserAdminPortType struct {
 	Cli soap.Client
 }
 
-func NewUserAdminPortType(cli soap.Client) UserAdminType {
+/*func NewUserAdminPortType(cli soap.Client) UserAdminType {
 	return &UserAdminPortType{cli}
-}
+}*/
 
 type UserAdminType interface {
 
@@ -114,7 +116,7 @@ func (p *UserAdminPortType) DeleteUser(α *wsdlgo.DeleteUser) (err error) {
 }
 
 // GetAllPermittedRoleNames
-func (p *UserAdminPortType) GetAllPermittedRoleNames(α *wsdlgo.GetAllPermittedRoleNames) (β *wsdlgo.GetAllPermittedRoleNamesResponse, err error) {
+/*func (p *UserAdminPortType) GetAllPermittedRoleNames(α *wsdlgo.GetAllPermittedRoleNames) (β *wsdlgo.GetAllPermittedRoleNamesResponse, err error) {
 	γ := struct {
 		XMLName xml.Name `xml:"Envelope"`
 		Body    struct {
@@ -153,35 +155,35 @@ func (p *UserAdminPortType) GetAllPermittedRoleNames(α *wsdlgo.GetAllPermittedR
 					return nil, err
 				}
 				return &γ.Body.M, nil
-			}
+			}*/
 
-// GetAllUIPermissions
-			func (p *UserAdminPortType) GetAllUIPermissions(α *wsdlgo.GetAllUIPermissions) (β *wsdlgo.GetAllUIPermissionsResponse, err error) {
-				γ := struct {
-					XMLName xml.Name `xml:"Envelope"`
-					Body    struct {
-						M wsdlgo.GetAllUIPermissionsResponse `xml:"getAllUIPermissionsResponse"`
-					}
-					}{}
-					if err = p.Cli.RoundTrip(α, &γ); err != nil {
-						return nil, err
-					}
-					return &γ.Body.M, nil
-				}
 
-// GetRolePermissions
-				func (p *UserAdminPortType) GetRolePermissions(α *wsdlgo.GetRolePermissions) (β *wsdlgo.GetRolePermissionsResponse, err error) {
-					γ := struct {
-						XMLName xml.Name `xml:"Envelope"`
-						Body    struct {
-							M wsdlgo.GetRolePermissionsResponse `xml:"getRolePermissionsResponse"`
-						}
-						}{}
-						if err = p.Cli.RoundTrip(α, &γ); err != nil {
-							return nil, err
-						}
-						return &γ.Body.M, nil
-					}
+func (p *UserAdminPortType) GetAllUIPermissions(α *wsdlgo.GetAllUIPermissions) (β *wsdlgo.GetAllUIPermissionsResponse, err error) {
+	γ := struct {
+		XMLName xml.Name `xml:"Envelope"`
+		Body    struct {
+			M wsdlgo.GetAllUIPermissionsResponse `xml:"getAllUIPermissionsResponse"`
+		}
+		}{}
+		if err = p.Cli.RoundTrip(α, &γ, "getAllUIPermissions"); err != nil {
+			return nil, err
+		}
+		return &γ.Body.M, nil
+}
+
+
+func (p *UserAdminPortType) GetRolePermissions(α *wsdlgo.GetRolePermissions) (β *wsdlgo.GetRolePermissionsResponse, err error) {
+	γ := struct {
+		XMLName xml.Name `xml:"Envelope"`
+		Body    struct {
+			M wsdlgo.GetRolePermissionsResponse `xml:"getRolePermissionsResponse"`
+		}
+	}{}
+	if err = p.Cli.RoundTrip(α, &γ, "getRolePermissions"); err != nil {
+		return nil, err
+	}
+	return &γ.Body.M, nil
+}
 
 // GetRolesOfCurrentUser
 					func (p *UserAdminPortType) GetRolesOfCurrentUser(α *wsdlgo.GetRolesOfCurrentUser) (β *wsdlgo.GetRolesOfCurrentUserResponse, err error) {
@@ -191,7 +193,7 @@ func (p *UserAdminPortType) GetAllPermittedRoleNames(α *wsdlgo.GetAllPermittedR
 								M wsdlgo.GetRolesOfCurrentUserResponse `xml:"getRolesOfCurrentUserResponse"`
 							}
 							}{}
-							if err = p.Cli.RoundTrip(α, &γ); err != nil {
+							if err = p.Cli.RoundTrip(α, &γ, "getRolesOfCurrentUser"); err != nil {
 								return nil, err
 							}
 							return &γ.Body.M, nil
@@ -205,7 +207,7 @@ func (p *UserAdminPortType) GetAllPermittedRoleNames(α *wsdlgo.GetAllPermittedR
 									M wsdlgo.GetRolesOfUserResponse `xml:"getRolesOfUserResponse"`
 								}
 								}{}
-								if err = p.Cli.RoundTrip(α, &γ); err != nil {
+								if err = p.Cli.RoundTrip(α, &γ, "getRolesOfUser"); err != nil {
 									return nil, err
 								}
 								return &γ.Body.M, nil
@@ -219,7 +221,7 @@ func (p *UserAdminPortType) GetAllPermittedRoleNames(α *wsdlgo.GetAllPermittedR
 										M wsdlgo.GetUserRealmInfoResponse `xml:"getUserRealmInfoResponse"`
 									}
 									}{}
-									if err = p.Cli.RoundTrip(α, &γ); err != nil {
+									if err = p.Cli.RoundTrip(α, &γ, "getUserRealmInfo"); err != nil {
 										return nil, err
 									}
 									return &γ.Body.M, nil
@@ -233,7 +235,7 @@ func (p *UserAdminPortType) GetAllPermittedRoleNames(α *wsdlgo.GetAllPermittedR
 											M wsdlgo.GetUsersOfRoleResponse `xml:"getUsersOfRoleResponse"`
 										}
 										}{}
-										if err = p.Cli.RoundTrip(α, &γ); err != nil {
+										if err = p.Cli.RoundTrip(α, &γ, "getUsersOfRole"); err != nil {
 											return nil, err
 										}
 										return &γ.Body.M, nil
@@ -247,7 +249,7 @@ func (p *UserAdminPortType) GetAllPermittedRoleNames(α *wsdlgo.GetAllPermittedR
 												M wsdlgo.HasMultipleUserStoresResponse `xml:"hasMultipleUserStoresResponse"`
 											}
 											}{}
-											if err = p.Cli.RoundTrip(α, &γ); err != nil {
+											if err = p.Cli.RoundTrip(α, &γ, "hasMultipleUserStores"); err != nil {
 												return nil, err
 											}
 											return &γ.Body.M, nil
@@ -261,41 +263,56 @@ func (p *UserAdminPortType) GetAllPermittedRoleNames(α *wsdlgo.GetAllPermittedR
 													M wsdlgo.IsSharedRolesEnabledResponse `xml:"isSharedRolesEnabledResponse"`
 												}
 												}{}
-												if err = p.Cli.RoundTrip(α, &γ); err != nil {
+												if err = p.Cli.RoundTrip(α, &γ, "isSharedRolesEnabled"); err != nil {
 													return nil, err
 												}
 												return &γ.Body.M, nil
 											}
 
-// ListAllUsers
-											func (p *UserAdminPortType) ListAllUsers(α *wsdlgo.ListAllUsers) (β *wsdlgo.ListAllUsersResponse, err error) {
-												γ := struct {
-													XMLName xml.Name `xml:"Envelope"`
-													Body    struct {
-														M wsdlgo.ListAllUsersResponse `xml:"listAllUsersResponse"`
-													}
-													}{}
-													if err = p.Cli.RoundTrip(α, &γ); err != nil {
-														return nil, err
-													}
-													return &γ.Body.M, nil
-												}
 
-// ListAllUsersWithPermission
-												func (p *UserAdminPortType) ListAllUsersWithPermission(α *wsdlgo.ListAllUsersWithPermission) (β *wsdlgo.ListAllUsersWithPermissionResponse, err error) {
-													γ := struct {
-														XMLName xml.Name `xml:"Envelope"`
-														Body    struct {
-															M wsdlgo.ListAllUsersWithPermissionResponse `xml:"listAllUsersWithPermissionResponse"`
-														}
-														}{}
-														if err = p.Cli.RoundTrip(α, &γ); err != nil {
-															return nil, err
-														}
-														return &γ.Body.M, nil
-													}
+func (p *UserAdminPortType) ListAllUsers(α *wsdlgo.ListAllUsers) (β *wsdlgo.ListAllUsersResponse, err error) {
+	γ := struct {
+		XMLName xml.Name `xml:"Envelope"`
+		Body    struct {
+			M wsdlgo.ListAllUsersResponse `xml:"listAllUsersResponse"`
+		}
+	}{}
+	if err = p.Cli.RoundTrip(α, &γ, "listAllUsers"); err != nil {
+		return nil, err
+	}
 
-// ListUserByClaim
+	l := γ.Body.M.Return
+
+	for i := 0;i < len(l); i++ {
+		fmt.Println("========================")
+		fmt.Printf("User #%d\n", i+1)
+		fmt.Println("========================")
+		s := reflect.ValueOf(l[i]).Elem()
+		typeOfT := s.Type()
+		for j := 0;j < s.NumField(); j++ {
+			f := s.Field(j)
+			fmt.Printf("%s = %v\n", typeOfT.Field(j).Name, f.Interface())	
+		}
+		fmt.Println()
+	}
+	return &γ.Body.M, nil
+}
+
+
+func (p *UserAdminPortType) ListAllUsersWithPermission(α *wsdlgo.ListAllUsersWithPermission) (β *wsdlgo.ListAllUsersWithPermissionResponse, err error) {
+	γ := struct {
+		XMLName xml.Name `xml:"Envelope"`
+		Body    struct {
+			M wsdlgo.ListAllUsersWithPermissionResponse `xml:"listAllUsersWithPermissionResponse"`
+		}
+	}{}
+	if err = p.Cli.RoundTrip(α, &γ, "listAllUsersWithPermission"); err != nil {
+		return nil, err
+	}
+	return &γ.Body.M, nil
+}
+
+
 													func (p *UserAdminPortType) ListUserByClaim(α *wsdlgo.ListUserByClaim) (β *wsdlgo.ListUserByClaimResponse, err error) {
 														γ := struct {
 															XMLName xml.Name `xml:"Envelope"`
@@ -303,7 +320,7 @@ func (p *UserAdminPortType) GetAllPermittedRoleNames(α *wsdlgo.GetAllPermittedR
 																M wsdlgo.ListUserByClaimResponse `xml:"listUserByClaimResponse"`
 															}
 															}{}
-															if err = p.Cli.RoundTrip(α, &γ); err != nil {
+															if err = p.Cli.RoundTrip(α, &γ, "listUserByClaim"); err != nil {
 																return nil, err
 															}
 															return &γ.Body.M, nil
@@ -317,7 +334,7 @@ func (p *UserAdminPortType) GetAllPermittedRoleNames(α *wsdlgo.GetAllPermittedR
 																	M wsdlgo.ListUserByClaimWithPermissionResponse `xml:"listUserByClaimWithPermissionResponse"`
 																}
 																}{}
-																if err = p.Cli.RoundTrip(α, &γ); err != nil {
+																if err = p.Cli.RoundTrip(α, &γ, "listUserByClaimWithPermission"); err != nil {
 																	return nil, err
 																}
 																return &γ.Body.M, nil
@@ -331,7 +348,7 @@ func (p *UserAdminPortType) GetAllPermittedRoleNames(α *wsdlgo.GetAllPermittedR
 																		M wsdlgo.ListUsersResponse `xml:"listUsersResponse"`
 																	}
 																	}{}
-																	if err = p.Cli.RoundTrip(α, &γ); err != nil {
+																	if err = p.Cli.RoundTrip(α, &γ, "listUsers"); err != nil {
 																		return nil, err
 																	}
 																	return &γ.Body.M, nil

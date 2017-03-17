@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"encoding/xml"
 	"fmt"
-	"io"
 	"io/ioutil"
 	"net/http"
 	"net/url"
@@ -50,7 +49,7 @@ type Client struct {
 	C *http.Client
 }
 
-func GenerateXML(v *wsdlgo.AddRole) {
+func GenerateXML(v *Envelope) {
 
 	dir, _ := filepath.Abs(filepath.Dir(os.Args[0]))
 
@@ -71,7 +70,7 @@ func GenerateXML(v *wsdlgo.AddRole) {
 func (m *Client) OneWayTrip(in Message, action string) error {
 	
 	c := m.C
-	req := GenerateOneWaySoapRequest(in)
+	req := GenerateSoapRequest(in)
 	
 
 	var b bytes.Buffer
@@ -110,21 +109,11 @@ func (m *Client) OneWayTrip(in Message, action string) error {
 
 }
  
-func (m *Client) RoundTrip(in, out Message) error {
+func (m *Client) RoundTrip(in, out Message, action string) error {
 
 	c := m.C
-	req := &Envelope{
-		EnvelopeAttr : "",
-		NSAttr       : "",
-		Header       : Header{},
-		Body         : Body{Message: in},
-	}
-	if req.EnvelopeAttr == "" {
-		req.EnvelopeAttr = "http://schemas.xmlsoap.org/soap/envelope/"
-	}
-	if req.NSAttr == "" {
-		req.NSAttr = "http://org.apache.axis2/xsd"
-	}
+	req := GenerateSoapRequest(in)
+
 	var b bytes.Buffer
 
 	err := xml.NewEncoder(&b).Encode(req)
@@ -137,8 +126,8 @@ func (m *Client) RoundTrip(in, out Message) error {
 		return err
 	}
 
-	r.Header.Set("Content-Type", "text/xml")
-	r.Header.Set("SOAPAction", `"urn:listAllUsers"`)
+	setHeaders(r, action)
+	
 	u, _ := url.Parse(URL)
 	r.AddCookie(c.Jar.Cookies(u)[0])
 
@@ -148,14 +137,15 @@ func (m *Client) RoundTrip(in, out Message) error {
 	}
 	
 	defer resp.Body.Close()
+	var body []byte
 	if resp.StatusCode != http.StatusOK {
-		// read only the first Mb of the body in error case
-		limReader := io.LimitReader(resp.Body, 1024*1024)
-		body, _ := ioutil.ReadAll(limReader)
-		return fmt.Errorf("%q: %q", resp.Status, body)
+		fmt.Println("HJK")
+		body, _ = ioutil.ReadAll(resp.Body)
+		fmt.Println("%q: %q", resp.Status, body)
 	}
+	body, _ = ioutil.ReadAll(resp.Body)
 
-	return xml.NewDecoder(resp.Body).Decode(out)
-	//generateXML(resp.Body)
+	_ = xml.Unmarshal(body, out)
+
 	return nil
 }

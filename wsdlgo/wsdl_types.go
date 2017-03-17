@@ -295,7 +295,7 @@ type IsSharedRolesEnabledResponse struct {
 type ListAllUsers struct {
 	XMLName xml.Name `xml:"xsd:listAllUsers" json:"-" yaml:"-"`
 	Filter  string   `xml:"xsd:filter,omitempty" json:"filter,omitempty" yaml:"filter,omitempty"`
-	Limit   int      `xml:"xsd:limit,omitempty" json:"limit,omitempty" yaml:"limit,omitempty"`
+	Limit   string      `xml:"xsd:limit,omitempty" json:"limit,omitempty" yaml:"limit,omitempty"`
 }
 
 // ListAllUsersResponse
