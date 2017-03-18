@@ -36,9 +36,9 @@ func InitOperation(args[] string, u UserAdminPortType) {
 
 func ParseAddInternalRole(args[] string ,u UserAdminPortType) {
 	
-	roleNamePtr     := addInternalRoleCommand.String("role-name", "admin", "Role Name")
-	userListPtr     := addInternalRoleCommand.String("user-list", "", "User List")
-	permissionsPtr  := addInternalRoleCommand.String("permissions", "", "User Permissions")
+	roleNamePtr     := addInternalRoleCommand.String("r", "admin", "Role Name")
+	userListPtr     := addInternalRoleCommand.String("u", "", "User List")
+	permissionsPtr  := addInternalRoleCommand.String("p", "", "User Permissions")
 
 	addInternalRoleCommand.Parse(args[1:])
 
@@ -53,9 +53,9 @@ func ParseAddInternalRole(args[] string ,u UserAdminPortType) {
 
 func ParseAddRemoveRolesOfUser(args[] string, u UserAdminPortType){
 
-	userNamePtr      := addRemoveRolesOfUserCommand.String("user-name", "", "User Name")
-	newRolesPtr      := addRemoveRolesOfUserCommand.String("new-roles", "", "New Roles")
-	deletedRolesPtr  := addRemoveRolesOfUserCommand.String("deleted-roles", " ", "Deleted Roles")
+	userNamePtr      := addRemoveRolesOfUserCommand.String("u", "", "User Name")
+	newRolesPtr      := addRemoveRolesOfUserCommand.String("r", "", "New Roles")
+	deletedRolesPtr  := addRemoveRolesOfUserCommand.String("d", " ", "Deleted Roles")
 
 	addRemoveRolesOfUserCommand.Parse(args[1:])
 
@@ -70,9 +70,9 @@ func ParseAddRemoveRolesOfUser(args[] string, u UserAdminPortType){
 
 func ParseAddRemoveUsersOfRole(args[] string, u UserAdminPortType){
 
-	roleNamePtr      := addRemoveRolesOfUserCommand.String("role-name", "", "User Name")
-	newUsersPtr      := addRemoveRolesOfUserCommand.String("new-users", "", "New Roles")
-	deletedUsersPtr  := addRemoveRolesOfUserCommand.String("deleted-users", " ", "Deleted Roles")
+	roleNamePtr      := addRemoveRolesOfUserCommand.String("r", "", "User Name")
+	newUsersPtr      := addRemoveRolesOfUserCommand.String("u", "", "New Roles")
+	deletedUsersPtr  := addRemoveRolesOfUserCommand.String("d", " ", "Deleted Roles")
 
 	addRemoveUsersOfRoleCommand.Parse(args[1:])
 
@@ -89,10 +89,10 @@ func ParseAddRole(args[] string, u UserAdminPortType){
 
 	flag := false
 
-	roleNamePtr      := addRoleCommand.String("role-name", "", "Role Name")
-	userListPtr      := addRoleCommand.String("user-list", "", "User List")
-	permissionsPtr   := addRoleCommand.String("permissions", "*", "Permissions")
-	isSharedPtr	     := addRoleCommand.Bool("shared", flag, "IsShared")
+	roleNamePtr      := addRoleCommand.String("r", "", "Role Name")
+	userListPtr      := addRoleCommand.String("u", "", "User List")
+	permissionsPtr   := addRoleCommand.String("p", "*", "Permissions")
+	isSharedPtr	     := addRoleCommand.Bool("s", flag, "IsShared")
 	
 	addRoleCommand.Parse(args[1:])
 
@@ -121,8 +121,8 @@ func ParseDeleteUser(args[] string, u UserAdminPortType) {
 
 func ParseListAllUsers(args[] string, u UserAdminPortType) {
 
-	filterPtr := listAllUsersCommand.String("filter", "*", "Filter")
-	limitPtr  := listAllUsersCommand.Int("limit", 100, "Limit")
+	filterPtr := listAllUsersCommand.String("f", "*", "Filter")
+	limitPtr  := listAllUsersCommand.Int("l", 100, "Limit")
 
 	listAllUsersCommand.Parse(args[1:])
 
