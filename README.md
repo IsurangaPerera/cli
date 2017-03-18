@@ -51,7 +51,7 @@ CLI is currently extended with the following capabilities.
 
 ### Samples
 
-***Add Internal Method***
+***Add Internal Role***
 
 ```sh
 $ cli addInternalRole -r sample -u "isuranga" 
@@ -61,7 +61,7 @@ $ cli addInternalRole -r sample -u "isuranga"
 ```sh
 $ cli listAllUsers
 ```
-OR
+ OR
 
 ```sh
 $ cli listAllUsers -f "*" -l 10
