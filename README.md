@@ -60,6 +60,10 @@ $ cli addInternalRole -r sample -u "isuranga"
 
 ```sh
 $ cli listAllUsers
+```
+OR
+
+```sh
 $ cli listAllUsers -f "*" -l 10
 ```
 
