@@ -41,7 +41,12 @@ CLI is currently extended with the following capabilities.
 | addRemoveUsersOfRole | **-r** | **role name** | string |
 | | **-u** | **new users** | string [ ] |
 | | **-d** | **deleted users** | string [ ] |
-
+| addRole | **-r** | **role name** | string |
+| | **-u** | **user list** | string [ ] |
+| | **-p** | **permissions** | string [ ] |
+| | **-s** | **shared** | boolean |
+| listAllUsers | **-f** | **filter** | string |
+| | **-l** | limit | int |
 
 
 ### Samples
@@ -49,6 +54,6 @@ CLI is currently extended with the following capabilities.
 ***Add Internal Method***
 
 ```sh
-$ cli addInternalRole --role-name sample --user-list isuranga 
+$ cli addInternalRole -r sample -u "isuranga" 
 ```
 
