@@ -23,20 +23,18 @@ Following attributes should be set inorder to run properly
 * **Soap11 Endpoint** (eg. services/UserAdmin.UserAdminHttpsSoap11Endpoint/)
 * **Soap12 Endpoint** (eg. services/UserAdmin.UserAdminHttpsSoap12Endpoint/)
 ```sh
-$ cli config --base-url [base_url] --user-name [user_name] --password [password] --soap11 [soap11_endpoint] --soap12 [soap12_endpoint]
+$ cli config -url [base_url] -u [user_name] -p [password] -s1 [soap11_endpoint] -s2 [soap12_endpoint]
 ```
 
 ### Usage
 
 CLI is currently extended with the following capabilities.
 
-| Command | Arguements |
-| ------ | ------ |
-| addInternalRole | **[role-name] [user-list] [permissions]** |
-| addRemoveRolesOfUser | **[user-name] [new-roles] [deleted-roles]** |
-| addRemoveUsersOfRole | **[role-name] [new-users] [deleted-users]** |
-| addRole | **[role-name] [user-list] [permissions] [shared]** |
-| listAllUsers | **[filter] [limit]** |
+| Command | Arguements | description | type |
+| ------ | ------ | ------| ------ |
+| addInternalRole | **[role-name] [user-list] [permissions]** | **role name** | string |
+| | **-u**| **user list** | string[] |
+| | **-p** | **permissions** | string[] |
 
 ### Samples
 
