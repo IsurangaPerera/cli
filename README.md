@@ -32,9 +32,20 @@ CLI is currently extended with the following capabilities.
 
 | Command | Arguements | description | type |
 | ------ | ------ | ------| ------ |
-| addInternalRole | **[role-name] [user-list] [permissions]** | **role name** | string |
-| | **-u**| **user list** | string[] |
-| | **-p** | **permissions** | string[] |
+
+| addInternalRole | **-r** | **role name** | string |
+| | **-u**| **user list** | string [ ] |
+| | **-p** | **permissions** | string [ ] |
+
+| addRemoveRolesOfUser | **-u** | **user name** | string |
+| | **-r** | **new roles** | string [ ] |
+| | **-d** | **deleted roles** | string [ ] |
+
+| addRemoveUsersOfRole | **-r** | **role name** | string |
+| | **-u** | **new users** | string [ ] |
+| | **-d** | **deleted users** | string [ ] |
+
+
 
 ### Samples
 
