@@ -30,7 +30,7 @@ $ cli config -url [base_url] -u [user_name] -p [password] -s1 [soap11_endpoint] 
 
 CLI is currently extended with the following capabilities.
 
-| Command | Arguements | description | type |
+| Command | Arguements | Description | Type |
 | ------ | ------ | ------| ------ |
 | addInternalRole | **-r** | **role name** | string |
 | | **-u**| **user list** | string [ ] |
@@ -51,9 +51,19 @@ CLI is currently extended with the following capabilities.
 
 ### Samples
 
-***Add Internal Method***
+***Add Internal Role***
 
 ```sh
 $ cli addInternalRole -r sample -u "isuranga" 
+```
+***List All Users***
+
+```sh
+$ cli listAllUsers
+```
+ OR
+
+```sh
+$ cli listAllUsers -f "*" -l 10
 ```
 
