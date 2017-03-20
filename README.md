@@ -54,7 +54,7 @@ CLI is currently extended with the following capabilities.
 ***Add Internal Role***
 
 ```sh
-$ cli addInternalRole -r sample -u "isuranga" 
+$ cli addInternalRole -r "sample" -u [isuranga harsha] 
 ```
 ***List All Users***
 
