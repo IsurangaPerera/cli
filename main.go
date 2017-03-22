@@ -19,7 +19,6 @@ var configFileExist bool
 func init() {
 
 	client, _ = soap.InitiateConnection()
-	parser.InitConfiguration(os.Args[1:])
 
 }
 
@@ -30,6 +29,7 @@ func main() {
 	var st = soap.Client{C : client}
 	var u =  parser.UserAdminPortType{Cli: st}
 
+	parser.ReadyConfigCommands(app)
 	parser.ReadyCommands(u, app)
 
 	app.Run(os.Args)
