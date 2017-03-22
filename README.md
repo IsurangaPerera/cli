@@ -9,6 +9,7 @@ CLI requires [GO](https://golang.org/) to run.
 
 
 ```sh
+$ go get github.com/IsurangaPerera/mow.cli
 $ git clone https://github.com/IsurangaPerera/cli.git
 $ cd cli
 $ go build .
