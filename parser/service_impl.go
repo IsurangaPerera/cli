@@ -7,8 +7,7 @@ import (
 "encoding/xml"
 "../wsdlgo"
 "context"
-"fmt"
-"reflect"
+"strconv"
 )
 
 var Namespace = "http://mgt.user.carbon.wso2.org"
@@ -255,19 +254,19 @@ func (p *UserAdminPortType) GetRolePermissions(α *wsdlgo.GetRolePermissions) (�
 											return &γ.Body.M, nil
 										}
 
-// IsSharedRolesEnabled
-										func (p *UserAdminPortType) IsSharedRolesEnabled(α *wsdlgo.IsSharedRolesEnabled) (β *wsdlgo.IsSharedRolesEnabledResponse, err error) {
-											γ := struct {
-												XMLName xml.Name `xml:"Envelope"`
-												Body    struct {
-													M wsdlgo.IsSharedRolesEnabledResponse `xml:"isSharedRolesEnabledResponse"`
-												}
-												}{}
-												if err = p.Cli.RoundTrip(α, &γ, "isSharedRolesEnabled"); err != nil {
-													return nil, err
-												}
-												return &γ.Body.M, nil
-											}
+
+func (p *UserAdminPortType) IsSharedRolesEnabled(α *wsdlgo.IsSharedRolesEnabled) (β *wsdlgo.IsSharedRolesEnabledResponse, err error) {
+	γ := struct {
+		XMLName xml.Name `xml:"Envelope"`
+		Body    struct {
+			M wsdlgo.IsSharedRolesEnabledResponse `xml:"isSharedRolesEnabledResponse"`
+		}
+	}{}
+	if err = p.Cli.RoundTrip(α, &γ, "isSharedRolesEnabled"); err != nil {
+		return nil, err
+	}
+	return &γ.Body.M, nil
+}
 
 
 func (p *UserAdminPortType) ListAllUsers(α *wsdlgo.ListAllUsers) (β *wsdlgo.ListAllUsersResponse, err error) {
@@ -283,18 +282,15 @@ func (p *UserAdminPortType) ListAllUsers(α *wsdlgo.ListAllUsers) (β *wsdlgo.Li
 
 	l := γ.Body.M.Return
 
-	for i := 0;i < len(l); i++ {
-		fmt.Println("========================")
-		fmt.Printf("User #%d\n", i+1)
-		fmt.Println("========================")
-		s := reflect.ValueOf(l[i]).Elem()
-		typeOfT := s.Type()
-		for j := 0;j < s.NumField(); j++ {
-			f := s.Field(j)
-			fmt.Printf("%s = %v\n", typeOfT.Field(j).Name, f.Interface())	
-		}
-		fmt.Println()
+	var strs []string
+	strs = append(strs, "\n")
+	for i := 0;i < len(l)-1; i++ {
+		s := "["+strconv.Itoa(i)+"]  "+ l[i].ItemDisplayName
+		strs = append(strs, s)
 	}
+
+	DisplayList(&strs, len(l))
+
 	return &γ.Body.M, nil
 }
 
@@ -313,34 +309,33 @@ func (p *UserAdminPortType) ListAllUsersWithPermission(α *wsdlgo.ListAllUsersWi
 }
 
 
-													func (p *UserAdminPortType) ListUserByClaim(α *wsdlgo.ListUserByClaim) (β *wsdlgo.ListUserByClaimResponse, err error) {
-														γ := struct {
-															XMLName xml.Name `xml:"Envelope"`
-															Body    struct {
-																M wsdlgo.ListUserByClaimResponse `xml:"listUserByClaimResponse"`
-															}
-															}{}
-															if err = p.Cli.RoundTrip(α, &γ, "listUserByClaim"); err != nil {
-																return nil, err
-															}
-															return &γ.Body.M, nil
-														}
+func (p *UserAdminPortType) ListUserByClaim(α *wsdlgo.ListUserByClaim) (β *wsdlgo.ListUserByClaimResponse, err error) {
+	γ := struct {
+		XMLName xml.Name `xml:"Envelope"`
+		Body    struct {
+			M wsdlgo.ListUserByClaimResponse `xml:"listUserByClaimResponse"`
+		}
+	}{}
+	if err = p.Cli.RoundTrip(α, &γ, "listUserByClaim"); err != nil {
+		return nil, err
+	}
+	return &γ.Body.M, nil
+}
 
-// ListUserByClaimWithPermission
-														func (p *UserAdminPortType) ListUserByClaimWithPermission(α *wsdlgo.ListUserByClaimWithPermission) (β *wsdlgo.ListUserByClaimWithPermissionResponse, err error) {
-															γ := struct {
-																XMLName xml.Name `xml:"Envelope"`
-																Body    struct {
-																	M wsdlgo.ListUserByClaimWithPermissionResponse `xml:"listUserByClaimWithPermissionResponse"`
-																}
-																}{}
-																if err = p.Cli.RoundTrip(α, &γ, "listUserByClaimWithPermission"); err != nil {
-																	return nil, err
-																}
-																return &γ.Body.M, nil
-															}
 
-// ListUsers
+func (p *UserAdminPortType) ListUserByClaimWithPermission(α *wsdlgo.ListUserByClaimWithPermission) (β *wsdlgo.ListUserByClaimWithPermissionResponse, err error) {
+	γ := struct {
+		XMLName xml.Name `xml:"Envelope"`
+		Body    struct {
+			M wsdlgo.ListUserByClaimWithPermissionResponse `xml:"listUserByClaimWithPermissionResponse"`
+		}
+	}{}
+	if err = p.Cli.RoundTrip(α, &γ, "listUserByClaimWithPermission"); err != nil {
+		return nil, err
+	}
+	return &γ.Body.M, nil
+}
+
 															func (p *UserAdminPortType) ListUsers(α *wsdlgo.ListUsers) (β *wsdlgo.ListUsersResponse, err error) {
 																γ := struct {
 																	XMLName xml.Name `xml:"Envelope"`

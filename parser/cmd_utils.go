@@ -2,6 +2,7 @@ package parser
 
 import (
 	"strings"
+	ui "github.com/gizak/termui"
 )
 
 func extractArray(a []string) *[]string{
@@ -24,4 +25,31 @@ func extractArray(a []string) *[]string{
 	}
 
 	return &arr
+}
+
+func DisplayList(strs *[]string, l int) {
+
+	err := ui.Init()
+	if err != nil {
+		panic(err)
+	}
+	defer ui.Close()
+
+	ls := ui.NewList()
+	ls.Items = *strs
+	ls.ItemFgColor = ui.ColorYellow
+	ls.BorderLabel = "User List"
+	ls.Height = (l-1)*2
+
+	ui.Body.AddRows(
+		ui.NewRow(
+			ui.NewCol(12, 0, ls)))
+	ui.Body.Align()
+
+	ui.Render(ui.Body)
+	ui.Handle("/sys/kbd/q", func(ui.Event) {
+		ui.StopLoop()
+	})
+	
+	ui.Loop()
 }
