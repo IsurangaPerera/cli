@@ -1,13 +1,11 @@
 package parser
 
 import (
-
-"../soap"
-"errors"
-"encoding/xml"
-"../wsdlgo"
-"context"
-"strconv"
+	"../soap"
+	"errors"
+	"encoding/xml"
+	"../wsdlgo"
+	"context"
 )
 
 var Namespace = "http://mgt.user.carbon.wso2.org"
@@ -197,78 +195,6 @@ func (p *UserAdminPortType) GetRolePermissions(α *wsdlgo.GetRolePermissions) (�
 							}
 							return &γ.Body.M, nil
 						}
-
-// GetRolesOfUser
-						func (p *UserAdminPortType) GetRolesOfUser(α *wsdlgo.GetRolesOfUser) (β *wsdlgo.GetRolesOfUserResponse, err error) {
-							γ := struct {
-								XMLName xml.Name `xml:"Envelope"`
-								Body    struct {
-									M wsdlgo.GetRolesOfUserResponse `xml:"getRolesOfUserResponse"`
-								}
-								}{}
-								if err = p.Cli.RoundTrip(α, &γ, "getRolesOfUser"); err != nil {
-									return nil, err
-								}
-								return &γ.Body.M, nil
-							}
-
-// GetUserRealmInfo
-							func (p *UserAdminPortType) GetUserRealmInfo(α *wsdlgo.GetUserRealmInfo) (β *wsdlgo.GetUserRealmInfoResponse, err error) {
-								γ := struct {
-									XMLName xml.Name `xml:"Envelope"`
-									Body    struct {
-										M wsdlgo.GetUserRealmInfoResponse `xml:"getUserRealmInfoResponse"`
-									}
-									}{}
-									if err = p.Cli.RoundTrip(α, &γ, "getUserRealmInfo"); err != nil {
-										return nil, err
-									}
-									return &γ.Body.M, nil
-								}
-
-// GetUsersOfRole
-								func (p *UserAdminPortType) GetUsersOfRole(α *wsdlgo.GetUsersOfRole) (β *wsdlgo.GetUsersOfRoleResponse, err error) {
-									γ := struct {
-										XMLName xml.Name `xml:"Envelope"`
-										Body    struct {
-											M wsdlgo.GetUsersOfRoleResponse `xml:"getUsersOfRoleResponse"`
-										}
-										}{}
-										if err = p.Cli.RoundTrip(α, &γ, "getUsersOfRole"); err != nil {
-											return nil, err
-										}
-										return &γ.Body.M, nil
-									}
-
-// HasMultipleUserStores
-									func (p *UserAdminPortType) HasMultipleUserStores(α *wsdlgo.HasMultipleUserStores) (β *wsdlgo.HasMultipleUserStoresResponse, err error) {
-										γ := struct {
-											XMLName xml.Name `xml:"Envelope"`
-											Body    struct {
-												M wsdlgo.HasMultipleUserStoresResponse `xml:"hasMultipleUserStoresResponse"`
-											}
-											}{}
-											if err = p.Cli.RoundTrip(α, &γ, "hasMultipleUserStores"); err != nil {
-												return nil, err
-											}
-											return &γ.Body.M, nil
-										}
-
-
-func (p *UserAdminPortType) IsSharedRolesEnabled(α *wsdlgo.IsSharedRolesEnabled) (β *wsdlgo.IsSharedRolesEnabledResponse, err error) {
-	γ := struct {
-		XMLName xml.Name `xml:"Envelope"`
-		Body    struct {
-			M wsdlgo.IsSharedRolesEnabledResponse `xml:"isSharedRolesEnabledResponse"`
-		}
-	}{}
-	if err = p.Cli.RoundTrip(α, &γ, "isSharedRolesEnabled"); err != nil {
-		return nil, err
-	}
-	return &γ.Body.M, nil
-}
-
-
 func (p *UserAdminPortType) ListAllUsers(α *wsdlgo.ListAllUsers) (β *wsdlgo.ListAllUsersResponse, err error) {
 	γ := struct {
 		XMLName xml.Name `xml:"Envelope"`
@@ -280,17 +206,73 @@ func (p *UserAdminPortType) ListAllUsers(α *wsdlgo.ListAllUsers) (β *wsdlgo.Li
 		return nil, err
 	}
 
-	l := γ.Body.M.Return
+	return &γ.Body.M, nil
+}
 
-	var strs []string
-	strs = append(strs, "\n")
-	for i := 0;i < len(l)-1; i++ {
-		s := "["+strconv.Itoa(i)+"]  "+ l[i].ItemDisplayName
-		strs = append(strs, s)
+
+func (p *UserAdminPortType) GetRolesOfUser(α *wsdlgo.GetRolesOfUser) (β *wsdlgo.GetRolesOfUserResponse, err error) {
+	γ := struct {
+		XMLName xml.Name `xml:"Envelope"`
+		Body    struct {
+			M wsdlgo.GetRolesOfUserResponse `xml:"getRolesOfUserResponse"`
+		}
+	}{}
+	if err = p.Cli.RoundTrip(α, &γ, "getRolesOfUser"); err != nil {
+		return nil, err
 	}
 
-	DisplayList(&strs, len(l))
+	return &γ.Body.M, nil
+}
 
+func (p *UserAdminPortType) GetUserRealmInfo(α *wsdlgo.GetUserRealmInfo) (β *wsdlgo.GetUserRealmInfoResponse, err error) {
+	γ := struct {
+		XMLName xml.Name `xml:"Envelope"`
+		Body    struct {
+			M wsdlgo.GetUserRealmInfoResponse `xml:"getUserRealmInfoResponse"`
+		}
+	}{}
+	if err = p.Cli.RoundTrip(α, &γ, "getUserRealmInfo"); err != nil {
+		return nil, err
+	}
+	return &γ.Body.M, nil
+}
+
+func (p *UserAdminPortType) GetUsersOfRole(α *wsdlgo.GetUsersOfRole) (β *wsdlgo.GetUsersOfRoleResponse, err error) {
+	γ := struct {
+		XMLName xml.Name `xml:"Envelope"`
+		Body    struct {
+			M wsdlgo.GetUsersOfRoleResponse `xml:"getUsersOfRoleResponse"`
+		}
+	}{}
+	if err = p.Cli.RoundTrip(α, &γ, "getUsersOfRole"); err != nil {
+		return nil, err
+	}
+	return &γ.Body.M, nil
+}
+
+func (p *UserAdminPortType) HasMultipleUserStores(α *wsdlgo.HasMultipleUserStores) (β *wsdlgo.HasMultipleUserStoresResponse, err error) {
+	γ := struct {
+		XMLName xml.Name `xml:"Envelope"`
+		Body    struct {
+			M wsdlgo.HasMultipleUserStoresResponse `xml:"hasMultipleUserStoresResponse"`
+		}
+	}{}
+	if err = p.Cli.RoundTrip(α, &γ, "hasMultipleUserStores"); err != nil {
+		return nil, err
+	}
+	return &γ.Body.M, nil
+}
+
+func (p *UserAdminPortType) IsSharedRolesEnabled(α *wsdlgo.IsSharedRolesEnabled) (β *wsdlgo.IsSharedRolesEnabledResponse, err error) {
+	γ := struct {
+		XMLName xml.Name `xml:"Envelope"`
+		Body    struct {
+			M wsdlgo.IsSharedRolesEnabledResponse `xml:"isSharedRolesEnabledResponse"`
+		}
+	}{}
+	if err = p.Cli.RoundTrip(α, &γ, "isSharedRolesEnabled"); err != nil {
+		return nil, err
+	}
 	return &γ.Body.M, nil
 }
 

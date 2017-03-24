@@ -243,10 +243,10 @@ type GetRolesOfCurrentUserResponse struct {
 
 // GetRolesOfUser
 type GetRolesOfUser struct {
-	XMLName  xml.Name `xml:"http://mgt.user.carbon.wso2.org getRolesOfUser" json:"-" yaml:"-"`
-	UserName string   `xml:"userName,omitempty" json:"userName,omitempty" yaml:"userName,omitempty"`
-	Filter   string   `xml:"filter,omitempty" json:"filter,omitempty" yaml:"filter,omitempty"`
-	Limit    int      `xml:"limit,omitempty" json:"limit,omitempty" yaml:"limit,omitempty"`
+	XMLName  xml.Name `xml:"xsd:getRolesOfUser" json:"-" yaml:"-"`
+	UserName string   `xml:"xsd:userName,omitempty" json:"userName,omitempty" yaml:"userName,omitempty"`
+	Filter   string   `xml:"xsd:filter,omitempty" json:"filter,omitempty" yaml:"filter,omitempty"`
+	Limit    string      `xml:"xsd:limit,omitempty" json:"limit,omitempty" yaml:"limit,omitempty"`
 }
 
 // GetRolesOfUserResponse

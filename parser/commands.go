@@ -145,7 +145,7 @@ func ReadyCommands(u UserAdminPortType, app *cli.Cli) {
 				Limit  : strconv.Itoa(*limitPtr),
 			}
 
-			u.ListAllUsers(v)
+			makeListOfAllUserInfo(&u, v)
 		}
 	})
 }
