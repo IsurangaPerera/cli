@@ -22,10 +22,8 @@ Create a Symlink to the cli directory inorder to run from anywhere
 Following attributes should be set inorder to run properly
 * **Base URL** (eg. localhost:9443)
 * **User Credentials** (username & password)
-* **Soap11 Endpoint** (eg. services/UserAdmin.UserAdminHttpsSoap11Endpoint/)
-* **Soap12 Endpoint** (eg. services/UserAdmin.UserAdminHttpsSoap12Endpoint/)
 ```sh
-$ cli config -url [base_url] -u [user_name] -p [password] -s1 [soap11_endpoint] -s2 [soap12_endpoint]
+$ cli config -url [base_url] -u [user_name] -p [password]
 ```
 
 ### Usage
